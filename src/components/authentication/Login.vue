@@ -10,12 +10,17 @@
                 <div class="form-group text-left">
                     <label>Email address</label>
                     <input type="email" name="email" class="form-control" aria-describedby="emailHelp"
-                           placeholder="Enter email">
+                           placeholder="Enter email"
+                           v-model="email">
                 </div>
                 <div class="form-group text-left">
                     <label>Password</label>
                     <input type="password" name="password" id="password" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Enter Password">
+                           aria-describedby="emailHelp" placeholder="Enter Password"
+                           v-model="password">
+                </div>
+                <div class="col-md-12 text-center" v-if="feedback">
+                    <p>{{feedback}}</p>
                 </div>
                 <div class="col-md-12 text-center ">
                     <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login
@@ -39,14 +44,31 @@
 </template>
 
 <script>
+    import axios from "axios"
+
     export default {
         name: "Login",
         data() {
-            return {}
+            return {
+                email: null,
+                password: null,
+                feedback: null
+            }
         },
         methods: {
             login() {
-                this.$router.push({name: "Home"})
+                axios.post("http://localhost:4000/user/login", {
+                    email: this.email,
+                    password: this.password
+                }).then((res) => {
+                    let token = res.data.token;
+                    localStorage.setItem("jwt", token);
+                    if (token) {
+                        this.$router.push({name: "Home"});
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                })
             }
         }
     }

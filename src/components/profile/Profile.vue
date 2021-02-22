@@ -1,22 +1,22 @@
 <template>
-    <div id="Profile" class="mt-5">
+    <div id="Profile" class="mt-5 container">
         <div class="row">
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-3 col-md-3 col-lg-3">
                 <ul class="list-group">
-                    <li class="list-group-item" :class="{active:pageName=== 'favorite'}"
+                    <li class="list-group-item" :class="{active:pageName === 'favorite'}"
                         @click="changePage('favorite')">favorite
                     </li>
                     <li class="list-group-item"
-                        :class="{active:pageName=== 'profile'}"
+                        :class="{active:pageName === 'profile'}"
                         @click="changePage('profile')">change profile
                     </li>
                 </ul>
             </div>
 
-            <div class="col-sm-10 col-md-10 col-lg-10">
+            <div class="col-sm-9 col-md-9 col-lg-9">
                 <transition name="fade" mode="out-in">
-                    <Favorite v-if="pageName === 'favorite'"/>
-                    <ChangeProfile v-if="pageName === 'profile'"/>
+                    <Favorite v-if="pageName === 'favorite'" :user="user"/>
+                    <ChangeProfile v-if="pageName === 'profile'" :user="user"/>
                 </transition>
             </div>
         </div>
@@ -26,6 +26,7 @@
 <script>
     import ChangeProfile from "./ChangeProfile";
     import Favorite from "./Favorite";
+    import VueJwtDecode from "vue-jwt-decode";
 
     export default {
         name: "Profile",
@@ -35,7 +36,8 @@
         },
         data() {
             return {
-                pageName: "favorite"
+                pageName: "favorite",
+                user: null
             }
         },
         methods: {
@@ -46,6 +48,9 @@
                     this.pageName = "favorite"
                 }
             }
+        }, created() {
+            let token = localStorage.getItem("jwt");
+            this.user = VueJwtDecode.decode(token)
         }
     }
 </script>

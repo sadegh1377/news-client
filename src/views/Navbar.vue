@@ -14,20 +14,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" v-if="isAuthenticated">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           @click="open()">
+                            {{user.name}}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-menu text-center" v-show="isOpen">
+                            <button class="dropdown-item" @click="goToProfile()">Profile</button>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <button class="dropdown-item" @click="logOut()">Logout!</button>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -40,15 +37,47 @@
 </template>
 
 <script>
+    import VueJwtDecode from "vue-jwt-decode";
+
     export default {
         name: "Navbar",
         data() {
-            return {}
+            return {
+                user: null,
+                isOpen: false,
+                isAuthenticated: false
+            }
         },
-        methods: {}
+        methods: {
+            open() {
+                console.log(this.isOpen)
+                this.isOpen = !this.isOpen;
+            },
+            logOut() {
+                localStorage.removeItem("jwt");
+                this.$router.push({name: "Login"});
+            },
+            goToProfile() {
+                if (localStorage.getItem("jwt")) {
+                    this.$router.push({name: "Profile"})
+                }
+            }
+        },
+        created() {
+            if (localStorage.getItem("jwt")) {
+                let token = localStorage.getItem("jwt");
+                this.user = VueJwtDecode.decode(token)
+                this.isAuthenticated = true
+            } else {
+                this.isAuthenticated = false
+            }
+        }
     }
 </script>
 
 <style scoped>
+    .dropdown-menu {
+        display: block;
+    }
 
 </style>

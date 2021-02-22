@@ -10,8 +10,8 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        name: "login",
-        path: "/",
+        name: "Login",
+        path: "/login",
         component: Login
     },
     {
@@ -21,23 +21,45 @@ const routes = [
     },
     {
         name: "Home",
-        path: "/home",
-        component: Home
+        path: "/",
+        component: Home,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         name: "Profile",
         path: "/profile",
-        component: Profile
+        component: Profile,
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         name: "FullNews",
         path: "/news/:id",
-        component: FullNews
+        component: FullNews,
+        meta: {
+            requiresAuth: true
+        }
     }
 ]
 
 const router = new VueRouter({
     routes
+})
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(rec => rec.meta.requiresAuth)) {
+        if (localStorage.getItem("jwt")) {
+            next();
+        } else {
+            next({
+                name: "Login"
+            })
+        }
+    } else {
+        next();
+    }
 })
 
 export default router
