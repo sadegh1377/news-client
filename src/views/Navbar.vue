@@ -1,12 +1,13 @@
 <template>
     <div id="Navbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button">
+            <a class="navbar-brand" href="#">Sadegh News</a>
+            <button class="navbar-toggler" type="button" @click="showNav()">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse  navbar-collapse" id="navbarSupportedContent"
+                 :class="{show:isShown===true,'text-left':isShown===true}">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -15,15 +16,15 @@
                         <a class="nav-link" href="#">Link</a>
                     </li>
                     <li class="nav-item dropdown" v-if="isAuthenticated">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            @click="open()">
                             {{user.name}}
                         </a>
-                        <div class="dropdown-menu text-center" v-show="isOpen">
-                            <button class="dropdown-item" @click="goToProfile()">Profile</button>
+                        <div class="dropdown-menu " v-show="isOpen">
+                            <button class="dropdown-item" @click="goToProfile()" @blur="close()">Profile</button>
                             <div class="dropdown-divider"></div>
-                            <button class="dropdown-item" @click="logOut()">Logout!</button>
+                            <button class="dropdown-item" @click="logOut()" @blur="close()">Logout</button>
                         </div>
                     </li>
                 </ul>
@@ -45,22 +46,30 @@
             return {
                 user: null,
                 isOpen: false,
-                isAuthenticated: false
+                isAuthenticated: false,
+                isShown: false
             }
         },
         methods: {
             open() {
-                console.log(this.isOpen)
                 this.isOpen = !this.isOpen;
+            },
+            close() {
+                this.isOpen = false;
             },
             logOut() {
                 localStorage.removeItem("jwt");
                 this.$router.push({name: "Login"});
+                // this.window.reload();
             },
             goToProfile() {
                 if (localStorage.getItem("jwt")) {
                     this.$router.push({name: "Profile"})
                 }
+            },
+            showNav() {
+                console.log(this.isShown)
+                this.isShown = !this.isShown;
             }
         },
         created() {
@@ -78,6 +87,11 @@
 <style scoped>
     .dropdown-menu {
         display: block;
+    }
+
+    .display {
+        display: block;
+        z-index: 10000;
     }
 
 </style>
