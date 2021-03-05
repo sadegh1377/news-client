@@ -2,7 +2,7 @@
     <div id="Home" class="container mt-5">
         <div class="row">
             <div class="col-md-12 ">
-                <div class="login-or">
+                <div class="login-or text-center">
                     <hr class="hr-or">
                     <span class="span-or">Technology</span>
                 </div>
@@ -112,7 +112,7 @@
             }
         },
         created() {
-            axios.get("http://localhost:3000/all-news").then((res) => {
+            axios.get("http://localhost:4000/all-news").then((res) => {
                 this.news = res.data
             }).catch((err) => {
                 console.log(err)

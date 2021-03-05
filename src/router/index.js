@@ -10,6 +10,11 @@ Vue.use(VueRouter)
 
 const routes = [
     {
+        name: "404",
+        path: "*",
+        component: () => import("../components/errors/404")
+    },
+    {
         name: "Login",
         path: "/login",
         component: Login

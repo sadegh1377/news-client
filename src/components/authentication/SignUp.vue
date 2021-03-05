@@ -59,11 +59,11 @@
         methods: {
 
             signUp() {
-                axios.post("http://localhost:4000/user/register", {
+                this.$http.post("user/register", {
                     name: this.name,
                     email: this.email,
                     password: this.password,
-                    favClasses:["technology","sport"]
+                    favClasses: []
                 }).then((res) => {
                     let token = res.data.token;
                     if (token) {
@@ -72,15 +72,18 @@
                     } else {
                         this.feedback = "Something Went Wrong"
                     }
-                }).catch((err) => {
-                    console.log(err)
-                    // let error = err.response;
-                    // if (error.status === 409) {
-                    //     this.feedback = error.data.message;
-                    // } else {
-                    //     this.feedback = error.data.err.message;
-                    // }
+                }).then(() => {
+                    location.reload()
                 })
+                    .catch((err) => {
+                        console.log(err)
+                        // let error = err.response;
+                        // if (error.status === 409) {
+                        //     this.feedback = error.data.message;
+                        // } else {
+                        //     this.feedback = error.data.err.message;
+                        // }
+                    })
             }
         }
     }

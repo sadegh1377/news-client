@@ -10,11 +10,13 @@
                 </div>
             </div>
         </div>
-        {{favClasses}}
+        <button class="btn btn-lg btn-primary" @click="submitFavorites()">Add To Favorites</button>
     </div>
 </template>
 
 <script>
+
+    import VueJwtDecode from "vue-jwt-decode";
 
     export default {
         name: "Favorite",
@@ -25,7 +27,7 @@
                 classes: [
                     {
                         name: "Technology",
-                        img: require('../../assets/Technology.jpeg'),
+                        // img: require('../../assets/Technology.jpeg'),
                         picked: false
                     },
                     {
@@ -57,6 +59,20 @@
                     c.picked = true;
                 }
 
+            },
+            submitFavorites() {
+                this.$http.put("user/add-fav-class", {
+                    id: this.$props.user._id,
+                    favClasses: this.favClasses
+                }).then((user) => {
+                    let token = localStorage.getItem("jwt")
+                    localStorage.removeItem(token)
+                    localStorage.setItem("jwt", user.data.tokens[user.data.tokens.length - 1].token);
+                }).then(() => {
+                    location.reload()
+                }).catch((err) => {
+                    console.log(err);
+                })
             }
         },
         created() {

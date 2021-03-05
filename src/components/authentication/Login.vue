@@ -66,6 +66,8 @@
                     if (token) {
                         this.$router.push({name: "Home"});
                     }
+                }).then(() => {
+                    location.reload()
                 }).catch((err) => {
                     console.log(err);
                 })

@@ -51,6 +51,7 @@
         }, created() {
             let token = localStorage.getItem("jwt");
             this.user = VueJwtDecode.decode(token)
+            console.log(this.user)
         }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div id="Navbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Sadegh News</a>
+            <a class="navbar-brand" href="https://github.com/sadegh1377" target="_blank">Sadegh News</a>
             <button class="navbar-toggler" type="button" @click="showNav()">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -9,11 +9,8 @@
             <div class="collapse  navbar-collapse" id="navbarSupportedContent"
                  :class="{show:isShown===true,'text-left':isShown===true}">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li class="nav-item active" v-if="isAuthenticated">
+                        <router-link class="nav-link" to="/">Home</router-link>
                     </li>
                     <li class="nav-item dropdown" v-if="isAuthenticated">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
@@ -60,7 +57,7 @@
             logOut() {
                 localStorage.removeItem("jwt");
                 this.$router.push({name: "Login"});
-                // this.window.reload();
+                location.reload();
             },
             goToProfile() {
                 if (localStorage.getItem("jwt")) {
