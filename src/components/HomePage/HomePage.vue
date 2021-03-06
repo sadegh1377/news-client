@@ -7,7 +7,7 @@
                     <span class="span-or">Technology</span>
                 </div>
             </div>
-            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 pointer" :key="index">
+            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image" :key="index">
                 <div class="card h-100" @click="viewNews(n._id)">
                     <div class="card-header text-center">{{n.NewsClass}}</div>
                     <div class="card-footer row m-0">
@@ -25,7 +25,7 @@
                     <span class="span-or">Sports</span>
                 </div>
             </div>
-            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 pointer" :key="index">
+            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image" :key="index">
                 <div class="card h-100" @click="viewNews(n._id)">
                     <div class="card-header text-center">{{n.NewsClass}}</div>
                     <div class="card-footer row m-0">
@@ -43,7 +43,7 @@
                     <span class="span-or">Economics</span>
                 </div>
             </div>
-            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 pointer" :key="index">
+            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image" :key="index">
                 <div class="card h-100" @click="viewNews(n._id)">
                     <div class="card-header text-center">{{n.NewsClass}}</div>
                     <div class="card-footer row m-0">
@@ -61,7 +61,7 @@
                     <span class="span-or">Politics</span>
                 </div>
             </div>
-            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 pointer" :key="index">
+            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image" :key="index">
                 <div class="card h-100" @click="viewNews(n._id)">
                     <div class="card-header text-center">{{n.NewsClass}}</div>
                     <div class="card-footer row m-0">
@@ -79,7 +79,7 @@
                     <span class="span-or">Health</span>
                 </div>
             </div>
-            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 pointer" :key="index">
+            <div v-for="(n,index) in news" class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image" :key="index">
                 <div class="card h-100" @click="viewNews(n._id)">
                     <div class="card-header text-center">{{n.NewsClass}}</div>
                     <div class="card-footer row m-0">
@@ -146,7 +146,7 @@
         opacity: 0;
     }
 
-    .pointer {
+    .bg-image {
         cursor: pointer;
     }
 </style>

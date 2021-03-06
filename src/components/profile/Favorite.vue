@@ -2,9 +2,11 @@
     <div id="Favorite" class="container">
         <div class="row">
             <div v-for="(c,index) in classes" class="col-md-6 col-lg-4 col-sm-12 mb-4" :key="index">
-                <div class="card pointer" @click="addToFavorite(c)">
-                    <div class="card-body"
-                         :class="{picked:c.picked === true}">
+                <div class="bg-image rounded"
+                     :class="{picked:c.picked === true}"
+                     :style="{ 'background-image': 'url(' + c.img + ')' }"
+                     @click="addToFavorite(c)">
+                    <div class="bg-text">
                         <h5 class="card-title">{{c.name}}</h5>
                     </div>
                 </div>
@@ -27,23 +29,27 @@
                 classes: [
                     {
                         name: "Technology",
-                        // img: require('../../assets/Technology.jpeg'),
+                        img: require('../../assets/newsClasses/unnamed.jpg'),
                         picked: false
                     },
                     {
                         name: "Sports",
+                        img: require('../../assets/newsClasses/sports.png'),
                         picked: false
                     },
                     {
                         name: "Economics",
+                        img: require('../../assets/newsClasses/economics.jpeg'),
                         picked: false
                     },
                     {
                         name: "Politics",
+                        img: require('../../assets/newsClasses/politics.jpeg'),
                         picked: false
                     },
                     {
                         name: "Health",
+                        img: require('../../assets/newsClasses/health.jpg'),
                         picked: false
                     }]
             }
@@ -62,14 +68,18 @@
             },
             submitFavorites() {
                 this.$http.put("user/add-fav-class", {
-                    id: this.$props.user._id,
-                    favClasses: this.favClasses
-                }).then((user) => {
-                    let token = localStorage.getItem("jwt")
-                    localStorage.removeItem(token)
-                    localStorage.setItem("jwt", user.data.tokens[user.data.tokens.length - 1].token);
+                    name: this.$props.user.name,
+                    email: this.$props.user.email,
+                    password: this.$props.user.password,
+                    _id: this.$props.user._id,
+                    faClasses: this.favClasses,
+                }).then((user, token) => {
+                    console.log(token)
+                    // let token = localStorage.getItem("jwt")
+                    // localStorage.removeItem(token)
+                    // localStorage.setItem("jwt", user.data.tokens[user.data.tokens.length - 1].token);
                 }).then(() => {
-                    location.reload()
+                    // location.reload()
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -89,11 +99,39 @@
 
 <style scoped>
     .picked {
-        background-color: #6ae7af;
+        border: 5px solid #6ae7af;
     }
 
-    .pointer {
+    .bg-image {
+        /*width: 300px;*/
+        height: 200px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        /*filter: blur(1px);*/
         cursor: pointer;
+        box-shadow: 0px 0px 15px 1px #c9c9c9;
     }
+
+    .bg-image:hover {
+        transform: rotate(5deg);
+    }
+
+    .bg-text {
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity/see-through */
+        color: white;
+        font-weight: bold;
+        /*border: 3px solid #f1f1f1;*/
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 87%;
+        padding: 20px;
+        text-align: center;
+    }
+
 
 </style>

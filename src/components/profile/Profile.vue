@@ -1,7 +1,7 @@
 <template>
     <div id="Profile" class="mt-5 container">
         <div class="row">
-            <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="col-sm-4 col-md-4 col-lg-3">
                 <ul class="list-group">
                     <li class="list-group-item" :class="{active:pageName === 'favorite'}"
                         @click="changePage('favorite')">favorite
@@ -13,7 +13,7 @@
                 </ul>
             </div>
 
-            <div class="col-sm-9 col-md-9 col-lg-9">
+            <div class="col-sm-8 col-md-8 col-lg-9 mt-sm">
                 <transition name="fade" mode="out-in">
                     <Favorite v-if="pageName === 'favorite'" :user="user"/>
                     <ChangeProfile v-if="pageName === 'profile'" :user="user"/>
@@ -57,6 +57,12 @@
 </script>
 
 <style scoped>
+
+    @media (max-width: 575px) {
+        .mt-sm {
+            margin-top: 3rem !important;
+        }
+    }
 
     .fade-enter-active {
         transition: opacity 0.2s ease-in;
