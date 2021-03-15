@@ -19,12 +19,12 @@
                            aria-describedby="emailHelp" placeholder="Enter Password"
                            v-model="password">
                 </div>
-                <div class="col-md-12 text-center" v-if="feedback">
-                    <p>{{feedback}}</p>
-                </div>
-                <div class="col-md-12 text-center ">
+                <div class="col-md-12 text-center mb-3 ">
                     <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login
                     </button>
+                </div>
+                <div class="col-md-12 text-center mb-3" v-if="feedback">
+                    <p class="btn btn-block mybtn nonePointer  alert-danger">{{feedback}}</p>
                 </div>
                 <div class="col-md-12 ">
                     <div class="login-or">
@@ -57,20 +57,31 @@
         },
         methods: {
             login() {
-                axios.post("http://localhost:4000/user/login", {
-                    email: this.email,
-                    password: this.password
-                }).then((res) => {
-                    let token = res.data.token;
-                    localStorage.setItem("jwt", token);
-                    if (token) {
-                        this.$router.push({name: "Home"});
-                    }
-                }).then(() => {
-                    location.reload()
-                }).catch((err) => {
-                    console.log(err);
-                })
+                if (this.email === null || this.email === "" ||
+                    this.password === null || this.password === "") {
+                    this.feedback = "Please fill the form";
+                } else {
+                    this.feedback = null;
+                    axios.post("http://localhost:4000/user/login", {
+                        email: this.email,
+                        password: this.password
+                    }).then((res) => {
+                        let token = res.data.token;
+                        localStorage.setItem("jwt", token);
+                        if (token) {
+                            this.$router.push({name: "Home"});
+                        }
+                    }).then(() => {
+                        location.reload()
+                    }).catch((err) => {
+                        let error = err.response;
+                        if (error.status === 401) {
+                            this.feedback = error.data.message;
+                        } else {
+                            this.feedback = error.data.err.message;
+                        }
+                    })
+                }
             }
         }
     }

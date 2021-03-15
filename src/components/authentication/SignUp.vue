@@ -22,14 +22,20 @@
                 <div class="form-group text-left">
                     <label>Password</label>
                     <input type="password" name="password" id="password" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Enter Password"
+                           aria-describedby="emailHelp" placeholder="Enter password"
                            v-model="password">
                 </div>
-                <div class="col-md-12 text-center mb-3" v-if="feedback">
-                    <p>{{feedback}}</p>
+                <div class="form-group text-left">
+                    <label>Confirm password</label>
+                    <input type="password" name="confirm password" id="confirm password" class="form-control"
+                           aria-describedby="emailHelp" placeholder="Enter password again"
+                           v-model="confirmPassword">
                 </div>
                 <div class="col-md-12 text-center mb-3">
                     <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">SignUp</button>
+                </div>
+                <div class="col-md-12 text-center mb-3" v-if="feedback">
+                    <p class="btn btn-block mybtn nonePointer alert-danger">{{feedback}}</p>
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
@@ -53,37 +59,52 @@
                 name: null,
                 email: null,
                 password: null,
+                confirmPassword: null,
                 feedback: null
             }
         },
         methods: {
 
             signUp() {
-                this.$http.post("user/register", {
-                    name: this.name,
-                    email: this.email,
-                    password: this.password,
-                    favClasses: []
-                }).then((res) => {
-                    let token = res.data.token;
-                    if (token) {
-                        localStorage.setItem("jwt", token);
-                        this.$router.push({name: "Profile"})
+
+                if (this.name === null || this.name === "" ||
+                    this.email === null || this.email === "" ||
+                    this.password === null || this.password === "" ||
+                    this.confirmPassword === null || this.confirmPassword === "") {
+                    this.feedback = "Please fill the form"
+                } else if (this.password.length < 5) {
+                    this.feedback = "The password field must be at lease 5 characters"
+                } else {
+                    if (this.password === this.confirmPassword) {
+                        this.feedback = null;
+                        this.$http.post("user/register", {
+                            name: this.name,
+                            email: this.email,
+                            password: this.password,
+                            favClasses: []
+                        }).then((res) => {
+                            let token = res.data.token;
+                            if (token) {
+                                localStorage.setItem("jwt", token);
+                                this.$router.push({name: "Profile"})
+                            } else {
+                                this.feedback = "Something Went Wrong"
+                            }
+                        }).then(() => {
+                            location.reload()
+                        })
+                            .catch((err) => {
+                                let error = err.response;
+                                if (error.status === 409) {
+                                    this.feedback = error.data.message;
+                                } else {
+                                    this.feedback = error.data.err.message;
+                                }
+                            })
                     } else {
-                        this.feedback = "Something Went Wrong"
+                        this.feedback = "Passwords does not match "
                     }
-                }).then(() => {
-                    location.reload()
-                })
-                    .catch((err) => {
-                        console.log(err)
-                        // let error = err.response;
-                        // if (error.status === 409) {
-                        //     this.feedback = error.data.message;
-                        // } else {
-                        //     this.feedback = error.data.err.message;
-                        // }
-                    })
+                }
             }
         }
     }

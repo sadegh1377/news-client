@@ -72,14 +72,13 @@
                     email: this.$props.user.email,
                     password: this.$props.user.password,
                     _id: this.$props.user._id,
-                    faClasses: this.favClasses,
-                }).then((user, token) => {
-                    console.log(token)
-                    // let token = localStorage.getItem("jwt")
-                    // localStorage.removeItem(token)
-                    // localStorage.setItem("jwt", user.data.tokens[user.data.tokens.length - 1].token);
-                }).then(() => {
-                    // location.reload()
+                    favClasses: this.favClasses,
+                }).then((res) => {
+                    let token = res.data.token;
+                    let key = localStorage.getItem("jwt");
+                    localStorage.removeItem(key)
+                    localStorage.setItem("jwt", token)
+                    location.reload()
                 }).catch((err) => {
                     console.log(err);
                 })
@@ -93,6 +92,7 @@
                     }
                 })
             })
+            this.favClasses = this.$props.user.favClasses
         }
     }
 </script>

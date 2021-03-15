@@ -4,7 +4,8 @@
             <div class="col-sm-4 col-md-4 col-lg-3">
                 <ul class="list-group">
                     <li class="list-group-item" :class="{active:pageName === 'favorite'}"
-                        @click="changePage('favorite')">favorite
+                        @click="changePage('favorite')">
+                        favorite
                     </li>
                     <li class="list-group-item"
                         :class="{active:pageName === 'profile'}"
