@@ -5,11 +5,15 @@
                 <ul class="list-group">
                     <li class="list-group-item" :class="{active:pageName === 'favorite'}"
                         @click="changePage('favorite')">
-                        favorite
+                        Favorite
                     </li>
                     <li class="list-group-item"
                         :class="{active:pageName === 'profile'}"
-                        @click="changePage('profile')">change profile
+                        @click="changePage('profile')">Change Profile
+                    </li>
+                    <li class="list-group-item"
+                        :class="{active:pageName === 'addNews'}"
+                        @click="changePage('addNews')">Add News
                     </li>
                 </ul>
             </div>
@@ -18,6 +22,7 @@
                 <transition name="fade" mode="out-in">
                     <Favorite v-if="pageName === 'favorite'" :user="user"/>
                     <ChangeProfile v-if="pageName === 'profile'" :user="user"/>
+                    <AddNews v-if="pageName ==='addNews'" :user="user"/>
                 </transition>
             </div>
         </div>
@@ -28,10 +33,12 @@
     import ChangeProfile from "./ChangeProfile";
     import Favorite from "./Favorite";
     import VueJwtDecode from "vue-jwt-decode";
+    import AddNews from "./AddNews";
 
     export default {
         name: "Profile",
         components: {
+            AddNews,
             Favorite,
             ChangeProfile
         },
@@ -43,16 +50,12 @@
         },
         methods: {
             changePage(page) {
-                if (page === "profile") {
-                    this.pageName = "profile"
-                } else {
-                    this.pageName = "favorite"
-                }
+                this.pageName = page;
             }
         }, created() {
             let token = localStorage.getItem("jwt");
-            this.user = VueJwtDecode.decode(token)
-            console.log(this.user)
+            this.user = VueJwtDecode.decode(token);
+            console.log(this.user);
         }
     }
 </script>
