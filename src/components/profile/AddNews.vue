@@ -3,12 +3,12 @@
         <form @submit.prevent="save()" class="myform">
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <label for="title">Title</label>
+                    <label for="title">تیتر</label>
                     <input type="text" class="form-control" id="title"
                            v-model="title">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="inputState">Class</label>
+                    <label for="inputState">موضوع</label>
                     <select id="inputState" class="form-control" v-model="newsClass">
                         <option v-for="c in newsClasses" :value="c">
                             {{c}}
@@ -17,12 +17,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Body</label>
+                <label for="exampleFormControlTextarea1">متن خبر</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
                           v-model="body"></textarea>
             </div>
             <div class="col-md-12 text-center mt-2 mb-3">
-                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">save</button>
+                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ذخیره</button>
             </div>
             <div class="col-md-12 text-center mb-3" v-if="feedback">
                 <p class="btn btn-block mybtn nonePointer  alert-danger">{{feedback}}</p>
@@ -37,15 +37,15 @@
 <script>
     export default {
         name: "AddNews",
-        props: ["user"],
         data() {
             return {
                 title: null,
                 body: null,
-                newsClass: "Technology",
-                newsClasses: ["Technology", "Sports", "Economics", "Politics", "Health"],
+                newsClass: "تکنولوژی",
+                newsClasses: ["تکنولوژی", "ورزش", "اقتصاد", "سیاست", "سلامت"],
                 feedback: null,
-                success: null
+                success: null,
+                user: null
             }
         },
         methods: {
@@ -59,7 +59,7 @@
                         newsBody: this.body,
                         newsClass: this.newsClass,
                         viewCounter: 0,
-                        author: this.$props.user.name
+                        author: this.user.name
                     }, {
                         headers: {
                             'Authorization': `Bearer ${token}`
@@ -71,11 +71,24 @@
                     })
                     this.title = null;
                     this.body = null;
-                    this.newsClass = "Technology";
+                    this.newsClass = "تکنولوژی";
                     this.feedback = null;
                 }
             }
+        },
+        created() {
+            let token = localStorage.getItem("jwt");
+            this.$http("user/me", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then((res) => {
+                this.user = res.data
+            }).catch((err) => {
+                console.log(err)
+            })
         }
+
     }
 </script>
 

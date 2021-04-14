@@ -2,30 +2,30 @@
     <div id="SignUp" class="container">
         <div class="myform form">
             <form @submit.prevent="save()" name="registration">
-                <div class="form-group text-left">
-                    <label>Name</label>
+                <div class="form-group text-right">
+                    <label>نام</label>
                     <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
-                           placeholder="Enter Name"
+                           placeholder="نام"
                            v-model="user.name">
                 </div>
-                <div class="form-group text-left">
-                    <label>Email address</label>
+                <div class="form-group text-right">
+                    <label>ایمیل</label>
                     <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-                           placeholder="Enter email"
+                           placeholder="ایمیل"
                            v-model="user.email">
                 </div>
-                <div class="form-group text-left">
-                    <label>Password</label>
+                <div class="form-group text-right">
+                    <label>رمز عبور</label>
                     <input type="password" name="password" id="password" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Enter Password">
+                           aria-describedby="emailHelp" placeholder="">
                 </div>
-                <div class="form-group text-left">
-                    <label>Re-enter Password</label>
+                <div class="form-group text-right">
+                    <label>تکرار رمز عبور</label>
                     <input type="password" name="password" id="" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Re-enter Password">
+                           aria-describedby="emailHelp" placeholder="">
                 </div>
                 <div class="col-md-12 text-center mb-3">
-                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">save</button>
+                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ذخیره</button>
                 </div>
             </form>
         </div>
@@ -35,14 +35,27 @@
 <script>
     export default {
         name: "SignUp",
-        props: ["user"],
         data() {
-            return {}
+            return {
+                user: null
+            }
         },
         methods: {
             save() {
                 this.$router.push({name: "Home"})
             }
+        },
+        created() {
+            let token = localStorage.getItem("jwt");
+            this.$http("user/me", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then((res) => {
+                this.user = res.data
+            }).catch((err) => {
+                console.log(err)
+            })
         }
     }
 </script>

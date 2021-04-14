@@ -1,7 +1,7 @@
 <template>
     <div id="Navbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="https://github.com/sadegh1377" target="_blank">Sadegh News</a>
+            <a class="navbar-brand" href="https://github.com/sadegh1377" target="_blank">صادق نیوز</a>
             <button class="navbar-toggler" type="button" @click="showNav()" v-if="isAuthenticated">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -10,7 +10,7 @@
                  :class="{show:isShown===true,'text-left':isShown===true}">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active" v-if="isAuthenticated">
-                        <router-link class="nav-link" to="/">Home</router-link>
+                        <router-link class="nav-link" to="/">صفحه اصلی</router-link>
                     </li>
                     <li class="nav-item dropdown" v-if="isAuthenticated">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
@@ -19,15 +19,15 @@
                             {{user.name}}
                         </a>
                         <div class="dropdown-menu " v-show="isOpen">
-                            <button class="dropdown-item" @click="goToProfile()" @blur="close()">Profile</button>
+                            <button class="dropdown-item" @click="goToProfile()" @blur="close()">حساب کاربری</button>
                             <div class="dropdown-divider"></div>
-                            <button class="dropdown-item" @click="logOut()" @blur="close()">Logout</button>
+                            <button class="dropdown-item" @click="logOut()" @blur="close()">خروج</button>
                         </div>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="جستجو" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">جستجو</button>
                 </form>
             </div>
         </nav>
@@ -86,9 +86,17 @@
         display: block;
     }
 
+    .navbar-brand {
+        font-size: xx-large;
+    }
+
     .display {
         display: block;
         z-index: 10000;
     }
+
+    /*.navbar{*/
+    /*    background-color: #BF460C !important;*/
+    /*}*/
 
 </style>

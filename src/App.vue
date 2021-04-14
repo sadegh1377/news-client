@@ -8,8 +8,14 @@
 </template>
 
 <style>
+    /*@import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');*/
+    /*@import url('https://fonts.googleapis.com/css2?family=Markazi+Text:wght@700&display=swap');*/
+    /*@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@800&display=swap');*/
+    /*@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@400&display=swap');*/
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap');
+
     #app {
-        font-family: Avenir, Helvetica, Arial, sans-serif;
+        font-family: Avenir, Helvetica, Arial, 'Markazi Text', 'Almarai', 'Cairo', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: center;

@@ -12,43 +12,42 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-lg btn-primary" @click="submitFavorites()">Add To Favorites</button>
+        <button class="btn btn-lg btn-primary" @click="submitFavorites()">افرودن به علاقه مندی ها</button>
     </div>
 </template>
 
 <script>
 
-    import VueJwtDecode from "vue-jwt-decode";
-
     export default {
         name: "Favorite",
-        props: ["user"],
+        // props: ["user"],
         data() {
             return {
+                user: null,
                 favClasses: [],
                 classes: [
                     {
-                        name: "Technology",
+                        name: "تکنولوژی",
                         img: require('../../assets/newsClasses/unnamed.jpg'),
                         picked: false
                     },
                     {
-                        name: "Sports",
+                        name: "ورزش",
                         img: require('../../assets/newsClasses/sports.png'),
                         picked: false
                     },
                     {
-                        name: "Economics",
+                        name: "اقتصاد",
                         img: require('../../assets/newsClasses/economics.jpeg'),
                         picked: false
                     },
                     {
-                        name: "Politics",
+                        name: "سیاست",
                         img: require('../../assets/newsClasses/politics.jpeg'),
                         picked: false
                     },
                     {
-                        name: "Health",
+                        name: "سلامت",
                         img: require('../../assets/newsClasses/health.jpg'),
                         picked: false
                     }]
@@ -68,10 +67,7 @@
             },
             submitFavorites() {
                 this.$http.put("user/add-fav-class", {
-                    name: this.$props.user.name,
-                    email: this.$props.user.email,
-                    password: this.$props.user.password,
-                    _id: this.$props.user._id,
+                    email: this.user.email,
                     favClasses: this.favClasses,
                 }).then((res) => {
                     let token = res.data.token;
@@ -85,14 +81,25 @@
             }
         },
         created() {
-            this.classes.forEach((c) => {
-                this.$props.user.favClasses.forEach((fc) => {
-                    if (c.name === fc) {
-                        c.picked = true
-                    }
+            let token = localStorage.getItem("jwt");
+            this.$http("user/me", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then((res) => {
+                this.user = res.data
+            }).then(() => {
+                this.classes.forEach((c) => {
+                    this.user.favClasses.forEach((fc) => {
+                        if (c.name === fc) {
+                            c.picked = true
+                        }
+                    })
                 })
+                this.favClasses = this.user.favClasses
+            }).catch((err) => {
+                console.log(err)
             })
-            this.favClasses = this.$props.user.favClasses
         }
     }
 </script>

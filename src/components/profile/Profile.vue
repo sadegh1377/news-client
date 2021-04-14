@@ -5,24 +5,24 @@
                 <ul class="list-group">
                     <li class="list-group-item" :class="{active:pageName === 'favorite'}"
                         @click="changePage('favorite')">
-                        Favorite
+                        مورد علاقه
                     </li>
                     <li class="list-group-item"
                         :class="{active:pageName === 'profile'}"
-                        @click="changePage('profile')">Change Profile
+                        @click="changePage('profile')">اطلاعات حساب
                     </li>
                     <li class="list-group-item"
                         :class="{active:pageName === 'addNews'}"
-                        @click="changePage('addNews')">Add News
+                        @click="changePage('addNews')">افزودن خبر
                     </li>
                 </ul>
             </div>
 
             <div class="col-sm-8 col-md-8 col-lg-9 mt-sm">
                 <transition name="fade" mode="out-in">
-                    <Favorite v-if="pageName === 'favorite'" :user="user"/>
-                    <ChangeProfile v-if="pageName === 'profile'" :user="user"/>
-                    <AddNews v-if="pageName ==='addNews'" :user="user"/>
+                    <Favorite v-if="pageName === 'favorite'"/>
+                    <ChangeProfile v-if="pageName === 'profile'"/>
+                    <AddNews v-if="pageName ==='addNews'"/>
                 </transition>
             </div>
         </div>
@@ -45,7 +45,6 @@
         data() {
             return {
                 pageName: "favorite",
-                user: null
             }
         },
         methods: {
@@ -53,9 +52,17 @@
                 this.pageName = page;
             }
         }, created() {
-            let token = localStorage.getItem("jwt");
-            this.user = VueJwtDecode.decode(token);
-            console.log(this.user);
+            // let token = localStorage.getItem("jwt");
+            // this.user = VueJwtDecode.decode(token);
+            // console.log(this.user);
+            // this.$http("user/me", {
+            //     headers: {
+            //         'Authorization': `Bearer ${token}`
+            //     }
+            // }).then((res) => {
+            //     this.user = res.data
+            // })
+
         }
     }
 </script>

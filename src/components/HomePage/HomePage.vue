@@ -133,17 +133,20 @@
 
 <script>
     import VueJwtDecode from "vue-jwt-decode";
+    import gsap from 'gsap'
 
     export default {
         name: "Home",
         data() {
             return {
                 newsClasses: null,
+                user: null,
                 technology: [],
                 sports: [],
                 economics: [],
                 politics: [],
-                health: []
+                health: [],
+
             }
         },
         methods: {
@@ -153,32 +156,54 @@
         },
         created() {
             let token = localStorage.getItem("jwt");
-            let user = VueJwtDecode.decode(token);
-            let classes = user.favClasses;
-            this.$http.get("news/fav-news", {
-                params: {
-                    favClasses: classes
+            this.$http("user/me", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
             }).then((res) => {
-                if (res.data[0].length !== 0) {
-                    this.technology = res.data[0];
-                }
-                if (res.data[1].length !== 0) {
-                    this.sports = res.data[1];
-                }
-                if (res.data[2].length !== 0) {
-                    this.economics = res.data[2];
-                }
-                if (res.data[3].length !== 0) {
-                    this.politics = res.data[3];
-                }
-                if (res.data[4].length !== 0) {
-                    this.health = res.data[4];
-                }
-                // console.log(res)
+                this.user = res.data
+                this.$http.get("news/fav-news", {
+                    params: {
+                        favClasses: this.user.favClasses
+                    }
+                }).then((res) => {
+                    console.log(res)
+                    if (res.data[0].length !== 0) {
+                        this.technology = res.data[0];
+                    }
+                    if (res.data[1].length !== 0) {
+                        this.sports = res.data[1];
+                    }
+                    if (res.data[2].length !== 0) {
+                        this.economics = res.data[2];
+                    }
+                    if (res.data[3].length !== 0) {
+                        this.politics = res.data[3];
+                    }
+                    if (res.data[4].length !== 0) {
+                        this.health = res.data[4];
+                    }
+                    // console.log(res)
+                }).then(() => {
+                    gsap.from('.cards', {
+                        duration: 0.5,
+                        opacity: 0,
+                        scale: 0,
+                        y: 300,
+                        ease: 'power1',
+                        stagger: {
+                            from: 'start',
+                            each: 0.2,
+                        }
+                    })
+                }).catch((err) => {
+                    console.log(err)
+                });
             }).catch((err) => {
                 console.log(err)
-            });
+            })
+
+
             // axios.get("http://localhost:3000/all-news-classes").then((res) => {
             //     this.newsClasses = res.data
             // }).catch((err) => {
