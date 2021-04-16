@@ -110,7 +110,7 @@
     }
 
     .bg-image {
-        /*width: 300px;*/
+        width: 100%;
         height: 200px;
         background-repeat: no-repeat;
         background-size: cover;
@@ -118,10 +118,12 @@
         /*filter: blur(1px);*/
         cursor: pointer;
         box-shadow: 0px 0px 15px 1px #c9c9c9;
+        overflow: hidden;
     }
 
     .bg-image:hover {
         transform: rotate(5deg);
+        transition-duration: .5s;
     }
 
     .bg-text {
@@ -138,7 +140,8 @@
         width: 87%;
         padding: 20px;
         text-align: center;
+        transition-duration: .5s;
+        overflow: hidden;
     }
-
 
 </style>

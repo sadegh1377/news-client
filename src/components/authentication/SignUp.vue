@@ -3,44 +3,46 @@
         <div class="myform form mt-5">
             <div class="logo mb-3">
                 <div class="col-md-12 text-center">
-                    <h1>Signup</h1>
+                    <h1>ثبت نام</h1>
                 </div>
             </div>
             <form @submit.prevent="signUp()" name="registration">
-                <div class="form-group text-left">
-                    <label>Name</label>
+                <div class="form-group text-right">
+                    <label>نام</label>
                     <input type="text" name="name" class="form-control" id="firstname" aria-describedby="emailHelp"
-                           placeholder="Enter name"
+                           placeholder="نام خود را وارد کنید"
                            v-model="name">
                 </div>
-                <div class="form-group text-left">
-                    <label>Email address</label>
+                <div class="form-group text-right">
+                    <label>ایمیل</label>
                     <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-                           placeholder="Enter email"
+                           placeholder="example@example.com"
                            v-model="email">
                 </div>
-                <div class="form-group text-left">
-                    <label>Password</label>
+                <div class="form-group text-right">
+                    <label>رمز عبور</label>
                     <input type="password" name="password" id="password" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Enter password"
+                           aria-describedby="emailHelp" placeholder=""
                            v-model="password">
                 </div>
-                <div class="form-group text-left">
-                    <label>Confirm password</label>
+                <div class="form-group text-right">
+                    <label>تکرار رمز عبور</label>
                     <input type="password" name="confirm password" id="confirm password" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Enter password again"
+                           aria-describedby="emailHelp" placeholder=""
                            v-model="confirmPassword">
                 </div>
                 <div class="col-md-12 text-center mb-3">
-                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">SignUp</button>
+                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ثبت نام</button>
                 </div>
                 <div class="col-md-12 text-center mb-3" v-if="feedback">
                     <p class="btn btn-block mybtn nonePointer alert-danger">{{feedback}}</p>
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
-                        <p class="text-center">
-                            <router-link to="/" id="signin">Already have an account?</router-link>
+                        <p class="text-center">قبلا عضو شده اید؟
+                            "
+                            <router-link to="/" id="signin"> ورود به حساب</router-link>
+                            "
                         </p>
                     </div>
                 </div>

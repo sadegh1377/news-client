@@ -42,7 +42,7 @@ const routes = [
     },
     {
         name: "FullNews",
-        path: "/news/:id",
+        path: "/news/:news_id",
         component: FullNews,
         meta: {
             requiresAuth: true

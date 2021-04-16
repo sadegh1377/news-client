@@ -4,30 +4,34 @@
             <div class="col-md-12" v-if="technology.length!==0">
                 <div class="login-or text-center">
                     <hr class="hr-or">
-                    <span class="span-or">Technology</span>
+                    <span class="span-or">تکنولوژی</span>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-5 mt-3 rounded  py-2 cards" v-for="(news,id) in technology"
-                 :key="news._id">
+            <router-link :to="{name:'FullNews' , params:{news_id:news._id}}"
+                         class="col-lg-4 col-md-5 col-sm-6 mt-3 rounded py-2 cards"
+                         v-for="(news,id) in technology"
+                         @click="viewNews(news)"
+                         :key="news._id">
                 <div class="card h-100">
                     <div class="card-img-top">
                         <img class="img-fluid img" src="../../assets/newsClasses/technology.png" :alt="news.newsClass">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title h-25 border-bottom ">
                             {{news.newsTitle}}
                         </h5>
                         <p class="card-text">{{news.newsBody}}</p>
 
+
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer background">
                         <div class="text-right">
                             <font-awesome-icon icon="eye"></font-awesome-icon>
                             {{news.viewCounter}}
                         </div>
                     </div>
                 </div>
-            </div>
+            </router-link>
             <!--            <div v-if="technology.length!==0"-->
             <!--                 v-for="n in technology"-->
             <!--                 class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image"-->
@@ -149,11 +153,7 @@
 
             }
         },
-        methods: {
-            viewNews(id) {
-                this.$router.push("/news/" + id)
-            }
-        },
+        methods: {},
         created() {
             let token = localStorage.getItem("jwt");
             this.$http("user/me", {
@@ -167,7 +167,7 @@
                         favClasses: this.user.favClasses
                     }
                 }).then((res) => {
-                    console.log(res)
+                    // console.log(res)
                     if (res.data[0].length !== 0) {
                         this.technology = res.data[0];
                     }
@@ -214,6 +214,14 @@
 </script>
 
 <style scoped>
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        color: black;
+    }
 
     .card-text {
         max-height: 200px;
@@ -242,5 +250,10 @@
 
     .bg-image {
         cursor: pointer;
+    }
+
+    .background {
+        background-color: #2991c8 !important;
+        color: white !important;
     }
 </style>

@@ -3,24 +3,24 @@
         <div class="myform form mt-5">
             <div class="logo mb-3">
                 <div class="col-md-12 text-center">
-                    <h1>Login</h1>
+                    <h1>ورود</h1>
                 </div>
             </div>
             <form @submit.prevent="login()" name="login">
-                <div class="form-group text-left">
-                    <label>Email address</label>
+                <div class="form-group text-right">
+                    <label>ایمیل</label>
                     <input type="email" name="email" class="form-control" aria-describedby="emailHelp"
-                           placeholder="Enter email"
+                           placeholder="example@example.com"
                            v-model="email">
                 </div>
-                <div class="form-group text-left">
-                    <label>Password</label>
+                <div class="form-group text-right">
+                    <label>رمز عبور</label>
                     <input type="password" name="password" id="password" class="form-control"
-                           aria-describedby="emailHelp" placeholder="Enter Password"
+                           aria-describedby="emailHelp" placeholder=""
                            v-model="password">
                 </div>
                 <div class="col-md-12 text-center mb-3 ">
-                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Login
+                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ورود
                     </button>
                 </div>
                 <div class="col-md-12 text-center mb-3" v-if="feedback">
@@ -29,12 +29,14 @@
                 <div class="col-md-12 ">
                     <div class="login-or">
                         <hr class="hr-or">
-                        <span class="span-or">or</span>
+                        <span class="span-or">یا</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <p class="text-center">Don't have account?
-                        <router-link to="/sign-up" id="signup">Sign up here</router-link>
+                    <p class="text-center">حساب کاربری ندارید؟
+                        "
+                        <router-link to="/sign-up" id="signup">اینجا ثبت نام کنید</router-link>
+                        "
                     </p>
                 </div>
             </form>

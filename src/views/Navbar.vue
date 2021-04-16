@@ -25,9 +25,9 @@
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="جستجو" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">جستجو</button>
+                <form class="form-inline my-2 my-lg-0" v-if="isAuthenticated">
+                    <input class="form-control ml-sm-2" type="search" placeholder="جستجو" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">جستجو</button>
                 </form>
             </div>
         </nav>
@@ -84,10 +84,12 @@
 <style scoped>
     .dropdown-menu {
         display: block;
+        /*color: white;*/
     }
 
     .navbar-brand {
         font-size: xx-large;
+        /*color: white;*/
     }
 
     .display {
@@ -95,8 +97,12 @@
         z-index: 10000;
     }
 
-    /*.navbar{*/
-    /*    background-color: #BF460C !important;*/
-    /*}*/
+    .navbar {
+        background-color: #0f94e9 !important;
+        color: white;
+    }
 
+    a {
+        color: white !important;
+    }
 </style>

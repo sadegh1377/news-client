@@ -5,13 +5,13 @@
                 <div class="form-group text-right">
                     <label>نام</label>
                     <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
-                           placeholder="نام"
+                           placeholder="نام خود را وارد کنید"
                            v-model="user.name">
                 </div>
                 <div class="form-group text-right">
                     <label>ایمیل</label>
                     <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-                           placeholder="ایمیل"
+                           placeholder="example@example.com"
                            v-model="user.email">
                 </div>
                 <div class="form-group text-right">
