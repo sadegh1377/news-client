@@ -98,7 +98,7 @@
     }
 
     .navbar {
-        background-color: #0f94e9 !important;
+        background-color: #e90f0f !important;
         color: white;
     }
 

@@ -20,7 +20,7 @@
                            v-model="password">
                 </div>
                 <div class="col-md-12 text-center mb-3 ">
-                    <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ورود
+                    <button type="submit" class="btn btn-block mybtn tx-tfm">ورود
                     </button>
                 </div>
                 <div class="col-md-12 text-center mb-3" v-if="feedback">

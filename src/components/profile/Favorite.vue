@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-lg btn-primary" @click="submitFavorites()">افرودن به علاقه مندی ها</button>
+        <button class="btn btn-lg mybtn" @click="submitFavorites()">افرودن به علاقه مندی ها</button>
     </div>
 </template>
 
