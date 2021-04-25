@@ -6,13 +6,13 @@
           <label>نام</label>
           <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
                  placeholder="نام خود را وارد کنید"
-                 v-model="user.name">
+                 v-model="name">
         </div>
         <div class="form-group text-right">
           <label>ایمیل</label>
           <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
                  placeholder="example@example.com"
-                 v-model="user.email">
+                 v-model="email">
         </div>
         <div class="form-group text-right">
           <label>رمز عبور</label>
@@ -37,7 +37,8 @@ export default {
   name: "SignUp",
   data() {
     return {
-      user: null
+      name: null,
+      email: null
     }
   },
   methods: {
@@ -52,7 +53,8 @@ export default {
         'Authorization': `Bearer ${token}`
       }
     }).then((res) => {
-      this.user = res.data
+      this.name = res.data.name;
+      this.email = res.data.email
     }).catch((err) => {
       console.log(err)
     })
@@ -61,5 +63,9 @@ export default {
 </script>
 
 <style scoped>
-@import "../../assets/loginSingUp.css";
+@import "../../assets/loginSingUp.css"
+
+.myform {
+  max-width: 700px !important;
+}
 </style>
