@@ -13,6 +13,7 @@
           </li>
           <li class="list-group-item"
               :class="{active:pageName === 'addNews'}"
+              v-if=" isAdmin === true"
               @click="changePage('addNews')">افزودن خبر
           </li>
         </ul>
@@ -22,7 +23,7 @@
         <transition name="fade" mode="out-in">
           <Favorite v-if="pageName === 'favorite'"/>
           <ChangeProfile v-if="pageName === 'profile'"/>
-          <AddNews v-if="pageName ==='addNews'"/>
+          <AddNews v-if="pageName ==='addNews' && isAdmin === true"/>
         </transition>
       </div>
     </div>
@@ -45,6 +46,7 @@ export default {
   data() {
     return {
       pageName: "favorite",
+      isAdmin: false
     }
   },
   methods: {
@@ -52,16 +54,14 @@ export default {
       this.pageName = page;
     }
   }, created() {
-    // let token = localStorage.getItem("jwt");
-    // this.user = VueJwtDecode.decode(token);
-    // console.log(this.user);
-    // this.$http("user/me", {
-    //     headers: {
-    //         'Authorization': `Bearer ${token}`
-    //     }
-    // }).then((res) => {
-    //     this.user = res.data
-    // })
+    let token = localStorage.getItem("jwt");
+    this.$http("user/me", {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }).then((res) => {
+      this.isAdmin = res.data.isAdmin
+    })
 
   }
 }

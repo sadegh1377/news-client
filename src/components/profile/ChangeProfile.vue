@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../assets/loginSingUp.css"
+@import "../../assets/loginSingUp.css";
 
 .myform {
   max-width: 700px !important;

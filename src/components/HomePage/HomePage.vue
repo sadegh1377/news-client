@@ -1,158 +1,57 @@
 <template>
   <div id="Home" class="container mt-5">
     <div class="row">
-      <div class="col-md-12" v-if="technology.length!==0">
-        <div class="login-or text-center">
-          <hr class="hr-or">
-          <span class="span-or">تکنولوژی</span>
-        </div>
+      <div class="col-sm-4 col-md-4 col-lg-3">
+        <ul class="list-group sticky-top">
+          <li class="list-group-item"
+              v-for="(classes,index) in sideBarClasses"
+              :class="{active:pageName === classes}"
+              :key="index"
+              @click="changePage(classes)">
+            {{ classes }}
+          </li>
+        </ul>
       </div>
-      <router-link :to="{name:'FullNews' , params:{news_id:news._id}}"
-                   class="col-lg-4 col-md-5 col-sm-6 mt-3 rounded py-2 cards"
-                   v-for="(news,id) in technology"
-                   :key="news._id">
-        <div class="card h-100">
-          <div class="card-img-top">
-            <img class="img-fluid img" src="../../assets/newsClasses/technology.png" :alt="news.newsClass">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title  border-bottom" :title="news.newsTitle">
-              {{ news.newsTitle }}
-            </h5>
-            <p class="card-text line-clamp">{{ news.newsBody }}</p>
-
-
-          </div>
-          <div class="card-footer background">
-            <div class="text-right">
-              <font-awesome-icon icon="eye"></font-awesome-icon>
-              {{ news.viewCounter }}
-            </div>
-          </div>
-        </div>
-      </router-link>
-      <!--            <div v-if="technology.length!==0"-->
-      <!--                 v-for="n in technology"-->
-      <!--                 class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image"-->
-      <!--                 :key="n._id">-->
-      <!--                <div class="card h-100" @click="viewNews(n._id)">-->
-      <!--                    <div class="card-header text-center">{{n.newsClass}}</div>-->
-      <!--                    <div class="card-footer row m-0">-->
-      <!--                        <div class="text-left col-6">id: {{n._id}}</div>-->
-      <!--                        <div class="text-right col-6">-->
-      <!--                            <font-awesome-icon icon="eye"></font-awesome-icon>-->
-      <!--                            {{n.viewCounter}}-->
-      <!--                        </div>-->
-      <!--                    </div>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div class="col-md-12" v-if="sports.length!==0">-->
-      <!--                <div class="login-or">-->
-      <!--                    <hr class="hr-or">-->
-      <!--                    <span class="span-or">Sports</span>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div v-if="sports.length!==0"-->
-      <!--                 v-for="(n,index) in sports"-->
-      <!--                 class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image"-->
-      <!--                 :key="n._id">-->
-      <!--                <div class="card h-100" @click="viewNews(n._id)">-->
-      <!--                    <div class="card-header text-center">{{n.newsClass}}</div>-->
-      <!--                    <div class="card-footer row m-0">-->
-      <!--                        <div class="text-left col-6">id: {{n._id}}</div>-->
-      <!--                        <div class="text-right col-6">-->
-      <!--                            <font-awesome-icon icon="eye"></font-awesome-icon>-->
-      <!--                            {{n.viewCounter}}-->
-      <!--                        </div>-->
-      <!--                    </div>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div class="col-md-12" v-if="economics.length!==0">-->
-      <!--                <div class="login-or">-->
-      <!--                    <hr class="hr-or">-->
-      <!--                    <span class="span-or">Economics</span>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div v-for="(n,index) in economics"-->
-      <!--                 v-if="economics.length!==0"-->
-      <!--                 class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image"-->
-      <!--                 :key="n._id">-->
-      <!--                <div class="card h-100" @click="viewNews(n._id)">-->
-      <!--                    <div class="card-header text-center">{{n.newsClass}}</div>-->
-      <!--                    <div class="card-footer row m-0">-->
-      <!--                        <div class="text-left col-6">id: {{n._id}}</div>-->
-      <!--                        <div class="text-right col-6">-->
-      <!--                            <font-awesome-icon icon="eye"></font-awesome-icon>-->
-      <!--                            {{n.viewCounter}}-->
-      <!--                        </div>-->
-      <!--                    </div>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div class="col-md-12" v-if="politics.length!==0">-->
-      <!--                <div class="login-or">-->
-      <!--                    <hr class="hr-or">-->
-      <!--                    <span class="span-or">Politics</span>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div v-if="politics.length!==0"-->
-      <!--                 v-for="(n,index) in politics"-->
-      <!--                 class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image"-->
-      <!--                 :key="n._id">-->
-      <!--                <div class="card h-100" @click="viewNews(n._id)">-->
-      <!--                    <div class="card-header text-center">{{n.newsClass}}</div>-->
-      <!--                    <div class="card-footer row m-0">-->
-      <!--                        <div class="text-left col-6">id: {{n._id}}</div>-->
-      <!--                        <div class="text-right col-6">-->
-      <!--                            <font-awesome-icon icon="eye"></font-awesome-icon>-->
-      <!--                            {{n.viewCounter}}-->
-      <!--                        </div>-->
-      <!--                    </div>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div class="col-md-12" v-if="health.length!==0">-->
-      <!--                <div class="login-or">-->
-      <!--                    <hr class="hr-or">-->
-      <!--                    <span class="span-or">Health</span>-->
-      <!--                </div>-->
-      <!--            </div>-->
-      <!--            <div v-if="health.length!==0"-->
-      <!--                 v-for="(n,index) in health"-->
-      <!--                 class="col-sm-12 col-md-4 col-lg-3 mb-3 bg-image"-->
-      <!--                 :key="n._id">-->
-      <!--                <div class="card h-100" @click="viewNews(n._id)">-->
-      <!--                    <div class="card-header text-center">{{n.newsClass}}</div>-->
-      <!--                    <div class="card-footer row m-0">-->
-      <!--                        <div class="text-left col-6">id: {{n._id}}</div>-->
-      <!--                        <div class="text-right col-6">-->
-      <!--                            <font-awesome-icon icon="eye"></font-awesome-icon>-->
-      <!--                            {{n.viewCounter}}-->
-      <!--                        </div>-->
-      <!--                    </div>-->
-      <!--                </div>-->
-      <!--            </div>-->
+      <div class="col-sm-8 col-md-8 col-lg-9">
+        <transition name="fade" mode="out-in">
+          <news-page v-if="pageName === 'تکنولوژی'" :news="technology"/>
+          <news-page v-if="pageName === 'اقتصاد'" :news="economics"/>
+          <news-page v-if="pageName === 'سلامت'" :news="health"/>
+          <news-page v-if="pageName === 'سیاست'" :news="politics"/>
+          <news-page v-if="pageName === 'ورزش'" :news="sports"/>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import VueJwtDecode from "vue-jwt-decode";
 import gsap from 'gsap'
+import NewsPage from "./newsPage";
 
 export default {
   name: "Home",
+  components: {NewsPage},
   data() {
     return {
-      newsClasses: null,
       user: null,
       technology: [],
       sports: [],
       economics: [],
       politics: [],
       health: [],
+      sideBarClasses: [],
+      pageName: null,
+      news: []
 
     }
   },
-  methods: {},
+  methods: {
+    changePage(page) {
+      this.pageName = page;
+      window.scrollTo(0, 0);
+    }
+  },
   created() {
     let token = localStorage.getItem("jwt");
     this.$http("user/me", {
@@ -166,35 +65,45 @@ export default {
           favClasses: this.user.favClasses
         }
       }).then((res) => {
-        console.log(res)
-        if (res.data[0].length !== 0) {
-          this.health = res.data[0];
-        }
-        if (res.data[1].length !== 0) {
-          this.economics = res.data[1];
-        }
-        if (res.data[2].length !== 0) {
-          this.technology = res.data[2];
-        }
-        if (res.data[3].length !== 0) {
-          this.politics = res.data[3];
-        }
-        if (res.data[4].length !== 0) {
-          this.sports = res.data[4];
-        }
-        // console.log(res)
-      }).then(() => {
-        gsap.from('.cards', {
-          duration: 0.5,
-          opacity: 0,
-          scale: 0,
-          y: 300,
-          ease: 'power1',
-          stagger: {
-            from: 'start',
-            each: 0.2,
+        // console.log(res.data[0][0].newsClass)
+
+        for (let i = 0; i < res.data.length; i++) {
+          switch (res.data[i][0].newsClass) {
+            case "تکنولوژی":
+              this.sideBarClasses.push("تکنولوژی");
+              this.technology = res.data[i];
+              break;
+            case "اقتصاد":
+              this.sideBarClasses.push("اقتصاد");
+              this.economics = res.data[i];
+              break;
+            case "سلامت":
+              this.sideBarClasses.push("سلامت");
+              this.health = res.data[i];
+              break;
+            case "سیاست":
+              this.sideBarClasses.push("سیاست");
+              this.politics = res.data[i];
+              break;
+            case "ورزش":
+              this.sideBarClasses.push("ورزش");
+              this.sports = res.data[i];
+              break;
           }
-        })
+        }
+        this.pageName = this.sideBarClasses[0];
+        // }).then(() => {
+        //   // gsap.from('.cards', {
+        //   //   duration: 0.5,
+        //   //   opacity: 0,
+        //   //   scale: 0,
+        //   //   y: 300,
+        //   //   ease: 'power1',
+        //   //   stagger: {
+        //   //     from: 'start',
+        //   //     each: 0.2,
+        //   //   }
+        //   })
       }).catch((err) => {
         console.log(err)
       });
@@ -213,34 +122,17 @@ export default {
 </script>
 
 <style scoped>
-.line-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.sticky-top {
+  top: 50px !important;
 }
 
-h5 {
-  padding: 5px;
+.list-group-item {
+  cursor: pointer;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  color: black;
-}
-
-.card-text {
-  max-height: 200px;
-  overflow: hidden;
-  text-overflow: clip;
-}
-
-.img {
-  height: 170px !important;
+.active {
+  background-color: #ff0000 !important;
+  border-color: #ff0000 !important
 }
 
 .fade-enter-active {
