@@ -35,7 +35,7 @@
           <button type="submit" class=" btn btn-block mybtn tx-tfm">ثبت نام</button>
         </div>
         <div class="col-md-12 text-center mb-3" v-if="feedback">
-          <p class="btn btn-block mybtn nonePointer alert-danger">{{ feedback }}</p>
+          <p class="btn btn-block nonePointer alert-danger">{{ feedback }}</p>
         </div>
         <div class="col-md-12 ">
           <div class="form-group">
@@ -73,9 +73,9 @@ export default {
           this.email === null || this.email === "" ||
           this.password === null || this.password === "" ||
           this.confirmPassword === null || this.confirmPassword === "") {
-        this.feedback = "Please fill the form"
+        this.feedback = "جاهای خالی را پر کنید"
       } else if (this.password.length < 5) {
-        this.feedback = "The password field must be at lease 5 characters"
+        this.feedback = "رمز عبور باید حداقل ۵ کاکتر باشد"
       } else {
         if (this.password === this.confirmPassword) {
           this.feedback = null;
@@ -94,17 +94,16 @@ export default {
             }
           }).then(() => {
             location.reload()
+          }).catch((err) => {
+            let error = err.response;
+            if (error.status === 409) {
+              this.feedback = error.data.message;
+            } else {
+              this.feedback = error.data.err.message;
+            }
           })
-              .catch((err) => {
-                let error = err.response;
-                if (error.status === 409) {
-                  this.feedback = error.data.message;
-                } else {
-                  this.feedback = error.data.err.message;
-                }
-              })
         } else {
-          this.feedback = "Passwords does not match "
+          this.feedback = "رمزهای عبور یکسان نیستند"
         }
       }
     }

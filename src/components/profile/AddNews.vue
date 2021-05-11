@@ -36,10 +36,10 @@
         <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ذخیره</button>
       </div>
       <div class="col-md-12 text-center mb-3" v-if="feedback">
-        <p class="btn btn-block mybtn nonePointer  alert-danger">{{ feedback }}</p>
+        <p class="btn btn-block nonePointer  alert-danger">{{ feedback }}</p>
       </div>
       <div class="col-md-12 text-center mb-3" v-if="success">
-        <p class="btn btn-block mybtn nonePointer  alert-success">{{ success }}</p>
+        <p class="btn btn-block  nonePointer  alert-success">{{ success }}</p>
       </div>
     </form>
   </div>
@@ -110,7 +110,7 @@ export default {
     save() {
       let token = localStorage.getItem("jwt");
       if (this.title === null || this.title === "" || this.body === null || this.body === "") {
-        this.feedback = "Complete The Form"
+        this.feedback = "جاهای خالی را پر کنید"
       } else {
         this.$http.post("news/add-news", {
           newsTitle: this.title,

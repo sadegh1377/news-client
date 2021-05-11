@@ -24,7 +24,7 @@
                     </button>
                 </div>
                 <div class="col-md-12 text-center mb-3" v-if="feedback">
-                    <p class="btn btn-block mybtn nonePointer  alert-danger">{{feedback}}</p>
+                    <p class="btn btn-block nonePointer  alert-danger">{{feedback}}</p>
                 </div>
                 <div class="col-md-12 ">
                     <div class="login-or">
