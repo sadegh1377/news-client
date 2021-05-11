@@ -5,10 +5,10 @@ import store from './store'
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faEye, faHeart, faUser} from '@fortawesome/free-solid-svg-icons'
+import {faEye, faHeart, faUser,faClock} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
-library.add(faEye, faHeart, faUser)
+library.add(faEye, faHeart, faUser,faClock)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
