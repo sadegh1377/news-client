@@ -1,6 +1,6 @@
 <template>
   <div id="SignUp" class="container">
-    <div class="myform form mt-5">
+    <div class="myform form mt-5 shadow">
       <div class="logo mb-3">
         <div class="col-md-12 text-center">
           <h1>ثبت نام</h1>
@@ -11,7 +11,8 @@
           <label>نام</label>
           <input type="text" name="name" class="form-control" id="firstname" aria-describedby="emailHelp"
                  placeholder="نام خود را وارد کنید"
-                 v-model="name">
+                 v-model="name"
+                 v-focus>
         </div>
         <div class="form-group text-right">
           <label>ایمیل</label>
@@ -63,6 +64,13 @@ export default {
       password: null,
       confirmPassword: null,
       feedback: null
+    }
+  },
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus()
+      }
     }
   },
   methods: {
