@@ -14,11 +14,11 @@
       </div>
       <div class="col-sm-8 col-md-8 col-lg-9">
         <transition name="fade" mode="out-in">
-          <news-page v-if="pageName === 'تکنولوژی'" :news="technology"/>
-          <news-page v-if="pageName === 'اقتصاد'" :news="economics"/>
-          <news-page v-if="pageName === 'سلامت'" :news="health"/>
-          <news-page v-if="pageName === 'سیاست'" :news="politics"/>
-          <news-page v-if="pageName === 'ورزش'" :news="sports"/>
+          <news-page v-if="pageName === 'تکنولوژی'" :news="technology" :isAdmin="isAdmin"/>
+          <news-page v-if="pageName === 'اقتصاد'" :news="economics" :isAdmin="isAdmin"/>
+          <news-page v-if="pageName === 'سلامت'" :news="health" :isAdmin="isAdmin"/>
+          <news-page v-if="pageName === 'سیاست'" :news="politics" :isAdmin="isAdmin"/>
+          <news-page v-if="pageName === 'ورزش'" :news="sports" :isAdmin="isAdmin"/>
         </transition>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
       health: [],
       sideBarClasses: [],
       pageName: null,
-      news: []
+      isAdmin: null
 
     }
   },
@@ -59,6 +59,7 @@ export default {
         'Authorization': `Bearer ${token}`
       }
     }).then((res) => {
+      this.isAdmin = res.data.isAdmin
       this.user = res.data
       this.$http.get("news/fav-news", {
         params: {
@@ -92,31 +93,12 @@ export default {
           }
         }
         this.pageName = this.sideBarClasses[0];
-        // }).then(() => {
-        //   // gsap.from('.cards', {
-        //   //   duration: 0.5,
-        //   //   opacity: 0,
-        //   //   scale: 0,
-        //   //   y: 300,
-        //   //   ease: 'power1',
-        //   //   stagger: {
-        //   //     from: 'start',
-        //   //     each: 0.2,
-        //   //   }
-        //   })
       }).catch((err) => {
         console.log(err)
       });
     }).catch((err) => {
       console.log(err)
     })
-
-
-    // axios.get("http://localhost:3000/all-news-classes").then((res) => {
-    //     this.newsClasses = res.data
-    // }).catch((err) => {
-    //     console.log(err)
-    // });
   }
 }
 </script>

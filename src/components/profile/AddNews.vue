@@ -3,7 +3,7 @@
     <form @submit.prevent="save()" class="myform shadow">
       <div class="form-row">
         <div class="form-group col-md-8">
-          <label for="title">تیتر</label>
+          <label for="title">عنوان</label>
           <input type="text" class="form-control" id="title"
                  v-model="title">
         </div>
@@ -123,7 +123,11 @@ export default {
             'Authorization': `Bearer ${token}`
           }
         }).then((res) => {
-          this.success = res.data.message
+          if (res.status === 201) {
+            this.success = res.data.message
+          } else if (res.status === 409) {
+            this.feedback = res.data.message
+          }
         }).catch((err) => {
           console.log(err)
         })

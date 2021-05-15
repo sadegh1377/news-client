@@ -53,7 +53,8 @@ export default {
     changePage(page) {
       this.pageName = page;
     }
-  }, created() {
+  },
+  created() {
     let token = localStorage.getItem("jwt");
     this.$http("user/me", {
       headers: {
@@ -62,7 +63,6 @@ export default {
     }).then((res) => {
       this.isAdmin = res.data.isAdmin
     })
-
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="row">
       <router-link :to="{name:'FullNews' , params:{news_id:news._id}}"
                    class="col-lg-4 col-md-6 col-sm-12 rounded py-2 pt-0 cards"
-                   v-for="(news,id) in news"
+                   v-for="(news,divId) in news"
                    :key="news._id">
         <div class="card h-100 shadow">
           <div class="card-img-top">
@@ -17,10 +17,15 @@
 
 
           </div>
-          <div class="card-footer background">
-            <div class="text-right">
+          <div class="card-footer background row m-0">
+            <div class="col-6 text-right">
               <font-awesome-icon icon="eye"></font-awesome-icon>
               {{ news.viewCounter }}
+            </div>
+            <div class="col-6 text-left" v-if="isAdmin" @click.prevent="deleteNews(news._id,divId)"
+                 title="پاک کردن">
+              <font-awesome-icon class="hover" icon="trash-alt"
+              ></font-awesome-icon>
             </div>
           </div>
         </div>
@@ -34,7 +39,12 @@ import gsap from 'gsap'
 
 export default {
   name: "newsPage",
-  props: ['news'],
+  props: ['news', "isAdmin"],
+  data() {
+    return {
+      deleteMessage: null
+    }
+  },
   mounted() {
     // gsap.from('.cards', {
     //   duration: 0.5,
@@ -47,6 +57,26 @@ export default {
     //     each: 0.2,
     //   }
     // })
+  },
+  methods: {
+    deleteNews(_id, divId) {
+      this.$http.delete("/news/delete-news", {
+        data: {
+          _id: _id
+        }
+      }).then(res => {
+        this.$props.news.splice(divId, 1);
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    // showDeleteMessage() {
+    //   this.deleteMessage = "delete";
+    // },
+    // hideDeleteMessage() {
+    //   this.deleteMessage = null;
+    // }
   }
 }
 </script>
@@ -102,4 +132,7 @@ a:hover {
   color: white !important;
 }
 
+.hover:hover {
+  color: #5ebeff;
+}
 </style>
