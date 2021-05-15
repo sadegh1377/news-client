@@ -10,14 +10,14 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        name: "404",
+        name: "PageNotFound",
         path: "*",
-        component: () => import("../components/errors/404"),
+        component: () => import("../components/errors/PageNotFound"),
         meta: {
-            title: '404',
+            title: 'PageNotFound',
             metaTags: [
                 {
-                    name: '404',
+                    name: 'PageNotFound',
                     content: 'صفحه یافت نشد'
                 }
             ]
