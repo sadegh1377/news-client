@@ -4,6 +4,12 @@
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
+    <footer class="bg-light text-center text-lg-start ">
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2021 Copyright:
+        <a class="text-dark" href="https://github.com/sadegh1377" target="_blank">MSH</a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -27,6 +33,7 @@
   src: local("iranSans"),
   url(assets/font/FontsFree-Net-ir_sans.ttf) format("truetype");
 }
+
 @font-face {
   font-family: "vazirLight";
   src: local("vazirLight"),
@@ -54,6 +61,13 @@
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+footer {
+  direction: ltr !important;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 </style>
 <script>

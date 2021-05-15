@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <router-link :to="{name:'FullNews' , params:{news_id:news._id}}"
-                   class="col-lg-4 col-md-6 col-sm-12 rounded py-2 pt-0 cards"
+                   class="col-lg-4 col-md-6 col-sm-12 py-2 pt-0 cards"
                    v-for="(news,divId) in news"
                    :key="news._id">
         <div class="card h-100 shadow">

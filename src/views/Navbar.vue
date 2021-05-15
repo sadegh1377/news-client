@@ -1,8 +1,8 @@
 <template>
   <div id="Navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand opacity" href="https://github.com/sadegh1377" target="_blank">صادق نیوز</a>
-      <button class="navbar-toggler" type="button" @click="showNav()" v-if="isAuthenticated">
+      <router-link to="/" class="navbar-brand opacity">صادق نیوز</router-link>
+      <button class="navbar-toggler background" type="button" @click="showNav()" v-if="isAuthenticated">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -61,7 +61,8 @@ export default {
     },
     goToProfile() {
       if (localStorage.getItem("jwt")) {
-        this.$router.push({name: "Profile"})
+        this.$router.push({name: "Profile"}).catch(() => {
+        });
       }
     },
     showNav() {
@@ -109,6 +110,10 @@ a {
 .opacity:hover {
   /*border: 1px solid white;*/
   opacity: .9;
+}
+
+.background {
+  background-color: #f8f8f8;
 }
 
 </style>
