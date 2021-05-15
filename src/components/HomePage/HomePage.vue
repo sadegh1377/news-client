@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-3">
         <ul class="list-group sticky-top">
-          <li class="list-group-item"
+          <li class="list-group-item shadow"
               v-for="(classes,index) in sideBarClasses"
               :class="{active:pageName === classes}"
               :key="index"

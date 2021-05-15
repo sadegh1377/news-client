@@ -1,6 +1,6 @@
 <template>
   <div id="ChangeProfile" class="container">
-    <div class="myform form">
+    <div class="myform form shadow">
       <div class="col-md-12 text-center mb-3">
         <p class="btn btn-block nonePointer alert-danger ">برای ایجاد تغییر روی نام یا ایمیل دوبار کلیک کنید</p>
       </div>

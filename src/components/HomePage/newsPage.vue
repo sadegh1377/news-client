@@ -5,7 +5,7 @@
                    class="col-lg-4 col-md-6 col-sm-12 rounded py-2 pt-0 cards"
                    v-for="(news,id) in news"
                    :key="news._id">
-        <div class="card h-100 ">
+        <div class="card h-100 shadow">
           <div class="card-img-top">
             <img class="img-fluid img" src="../../assets/newsClasses/technology.png" :alt="news.newsClass">
           </div>

@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-3">
         <ul class="list-group">
-          <li class="list-group-item" :class="{active:pageName === 'favorite'}"
+          <li class="list-group-item shadow" :class="{active:pageName === 'favorite'}"
               @click="changePage('favorite')">
             مورد علاقه
           </li>
-          <li class="list-group-item"
+          <li class="list-group-item shadow"
               :class="{active:pageName === 'profile'}"
               @click="changePage('profile')">اطلاعات حساب
           </li>
-          <li class="list-group-item"
+          <li class="list-group-item shadow"
               :class="{active:pageName === 'addNews'}"
               v-if=" isAdmin === true"
               @click="changePage('addNews')">افزودن خبر

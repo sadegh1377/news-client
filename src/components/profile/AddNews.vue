@@ -1,6 +1,6 @@
 <template>
   <div id="AddNews" class="container">
-    <form @submit.prevent="save()" class="myform">
+    <form @submit.prevent="save()" class="myform shadow">
       <div class="form-row">
         <div class="form-group col-md-8">
           <label for="title">تیتر</label>
