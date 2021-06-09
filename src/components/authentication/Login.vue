@@ -16,9 +16,20 @@
         </div>
         <div class="form-group text-right">
           <label>رمز عبور</label>
-          <input type="password" name="password" id="password" class="form-control"
-                 aria-describedby="emailHelp" placeholder=""
-                 v-model="password">
+          <div class="input-group">
+            <input :type="visibility" name="password" id="password"
+                   class="form-control "
+                   aria-describedby="emailHelp" placeholder=""
+                   v-model="password">
+            <span v-if="visibility === 'password'" class="input-group-btn  border p-1 rounded"
+                  @click="showPassword()">
+               <font-awesome-icon class="reveal align-content-center" icon="eye"></font-awesome-icon>
+          </span>
+            <span v-if="visibility === 'text'" class="input-group-btn border-right-0 border p-1 rounded"
+                  @click="hidePassword()">
+               <font-awesome-icon class="reveal align-content-center" icon="eye-slash"></font-awesome-icon>
+          </span>
+          </div>
         </div>
         <div class="col-md-12 text-center mb-3 ">
           <button type="submit" class="btn btn-block mybtn tx-tfm">ورود
@@ -55,7 +66,8 @@ export default {
     return {
       email: null,
       password: null,
-      feedback: null
+      feedback: null,
+      visibility: "password"
     }
   },
   directives: {
@@ -92,6 +104,14 @@ export default {
           }
         })
       }
+    },
+    showPassword() {
+      this.visibility = "text"
+      console.log(this.visibility)
+    },
+    hidePassword() {
+      this.visibility = "password"
+      console.log(this.visibility)
     }
   }
 }
@@ -99,4 +119,5 @@ export default {
 
 <style scoped>
 @import "../../assets/loginSingUp.css";
+
 </style>

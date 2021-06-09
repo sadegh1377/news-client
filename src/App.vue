@@ -4,12 +4,7 @@
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
-    <footer class="bg-light text-center text-lg-start ">
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2021 Copyright:
-        <a class="text-dark" href="https://github.com/sadegh1377" target="_blank">MSH</a>
-      </div>
-    </footer>
+    <Footer/>
   </div>
 </template>
 
@@ -63,17 +58,12 @@
   opacity: 0;
 }
 
-footer {
-  direction: ltr !important;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-}
 </style>
 <script>
 import Navbar from "./views/Navbar";
+import Footer from "./views/Footer";
 
 export default {
-  components: {Navbar}
+  components: {Footer, Navbar}
 }
 </script>

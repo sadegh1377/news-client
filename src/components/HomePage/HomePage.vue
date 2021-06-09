@@ -66,30 +66,33 @@ export default {
           favClasses: this.user.favClasses
         }
       }).then((res) => {
-        // console.log(res.data[0][0].newsClass)
-
+        // console.log(res.data)
         for (let i = 0; i < res.data.length; i++) {
-          switch (res.data[i][0].newsClass) {
-            case "تکنولوژی":
-              this.sideBarClasses.push("تکنولوژی");
-              this.technology = res.data[i];
-              break;
-            case "اقتصاد":
-              this.sideBarClasses.push("اقتصاد");
-              this.economics = res.data[i];
-              break;
-            case "سلامت":
-              this.sideBarClasses.push("سلامت");
-              this.health = res.data[i];
-              break;
-            case "سیاست":
-              this.sideBarClasses.push("سیاست");
-              this.politics = res.data[i];
-              break;
-            case "ورزش":
-              this.sideBarClasses.push("ورزش");
-              this.sports = res.data[i];
-              break;
+          if (res.data[i][0] !== undefined) {
+            switch (res.data[i][0].newsClass) {
+              case "تکنولوژی":
+                this.sideBarClasses.push("تکنولوژی");
+                this.technology = res.data[i];
+                break;
+              case "اقتصاد":
+                this.sideBarClasses.push("اقتصاد");
+                this.economics = res.data[i];
+                break;
+              case "سلامت":
+                this.sideBarClasses.push("سلامت");
+                this.health = res.data[i];
+                break;
+              case "سیاست":
+                this.sideBarClasses.push("سیاست");
+                this.politics = res.data[i];
+                break;
+              case "ورزش":
+                this.sideBarClasses.push("ورزش");
+                this.sports = res.data[i];
+                break;
+            }
+          } else {
+            console.log("something were wrong!!!")
           }
         }
         this.pageName = this.sideBarClasses[0];

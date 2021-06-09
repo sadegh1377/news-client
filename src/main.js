@@ -4,11 +4,28 @@ import router from './router'
 import store from './store'
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import vueFilePond, {setOptions} from 'vue-filepond';
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+import "filepond/dist/filepond.min.css";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+setOptions({
+    server: {
+        url: 'http://localhost:4000/images'
+    }
+});
+
+// Then create component
+const FilePond = vueFilePond(FilePondPluginFileValidateType,
+    FilePondPluginImagePreview)
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faEye, faHeart, faUser,faClock,faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import {faEye, faHeart, faUser, faClock, faTrashAlt, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
-library.add(faEye, faHeart, faUser,faClock,faTrashAlt)
+library.add(faEye, faHeart, faUser, faClock, faTrashAlt, faEyeSlash)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

@@ -2,7 +2,7 @@
   <div id="Profile" class="mt-5 container">
     <div class="row">
       <div class="col-sm-4 col-md-4 col-lg-3">
-        <ul class="list-group">
+        <ul class="list-group sticky-top">
           <li class="list-group-item shadow" :class="{active:pageName === 'favorite'}"
               @click="changePage('favorite')">
             مورد علاقه
@@ -72,6 +72,10 @@ export default {
   .mt-sm {
     margin-top: 3rem !important;
   }
+}
+
+.sticky-top {
+  top: 50px !important;
 }
 
 .list-group-item {

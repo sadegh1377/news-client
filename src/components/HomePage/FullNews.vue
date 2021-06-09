@@ -1,5 +1,5 @@
 <template>
-  <div id="FullNews" class="container mt-5">
+  <div id="FullNews" class="container mt-5 pb-5">
     <div class="card h-100 ">
       <div class="card-img-top">
         <img class="img-fluid img" src="../../assets/newsClasses/technology.png" :alt="fullNews.newsClass">
