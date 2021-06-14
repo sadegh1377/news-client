@@ -21,8 +21,8 @@
       <p>Page not found</p>
       <div class="buttons-con">
         <div class="action-link-wrap">
-          <a @click="goBack()" class="link-button link-back-button">Go Back</a>
-          <a @click="homePage()" class="link-button">Go to Home Page</a>
+          <a @click="goBack()" class="link-button link-back-button">بازگشت</a>
+          <a @click="homePage()" class="link-button">صفحه اصلی</a>
         </div>
       </div>
     </div>

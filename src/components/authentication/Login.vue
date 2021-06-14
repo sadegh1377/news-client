@@ -81,10 +81,10 @@ export default {
     login() {
       if (this.email === null || this.email === "" ||
           this.password === null || this.password === "") {
-        this.feedback = "Please fill the form";
+        this.feedback = "جاهای خالی را پر کنید";
       } else {
         this.feedback = null;
-        axios.post("http://localhost:4000/user/login", {
+        this.$http.post("user/login", {
           email: this.email,
           password: this.password
         }).then((res) => {
@@ -96,12 +96,13 @@ export default {
         }).then(() => {
           location.reload()
         }).catch((err) => {
+          console.log(err)
           let error = err.response;
-          if (error.status === 401) {
-            this.feedback = error.data.message;
-          } else {
-            this.feedback = error.data.err.message;
-          }
+          // if (error.status === 401) {
+          //   this.feedback = error.data.message;
+          // } else {
+          //   this.feedback = error.data.err.message;
+          // }
         })
       }
     },

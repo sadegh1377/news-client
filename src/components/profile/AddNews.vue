@@ -80,7 +80,8 @@ export default {
           newsBody: this.body,
           newsClass: this.newsClass,
           viewCounter: 0,
-          author: this.user.name
+          author: this.user.name,
+          replies: []
         }, {
           headers: {
             'Authorization': `Bearer ${token}`

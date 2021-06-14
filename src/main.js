@@ -22,15 +22,25 @@ setOptions({
 const FilePond = vueFilePond(FilePondPluginFileValidateType,
     FilePondPluginImagePreview)
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faEye, faHeart, faUser, faClock, faTrashAlt, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
+import {
+    faEye,
+    faHeart,
+    faUser,
+    faClock,
+    faTrashAlt,
+    faEyeSlash,
+    faTrash,
+    faEdit,
+    faReplyAll
+} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
-library.add(faEye, faHeart, faUser, faClock, faTrashAlt, faEyeSlash)
+library.add(faEye, faHeart, faUser, faClock, faTrashAlt, faEyeSlash, faTrash, faReplyAll, faEdit)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 const base = axios.create({
-    baseURL: "http://localhost:4000/"
+    baseURL: "http://localhost:8000/"
 });
 Vue.prototype.$http = base;
 
