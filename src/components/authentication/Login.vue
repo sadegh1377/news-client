@@ -96,13 +96,12 @@ export default {
         }).then(() => {
           location.reload()
         }).catch((err) => {
-          console.log(err)
           let error = err.response;
-          // if (error.status === 401) {
-          //   this.feedback = error.data.message;
-          // } else {
-          //   this.feedback = error.data.err.message;
-          // }
+          if (error.status === 401) {
+            this.feedback = error.data.message;
+          } else {
+            this.feedback = error.data.err.message;
+          }
         })
       }
     },

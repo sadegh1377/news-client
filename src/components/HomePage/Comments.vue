@@ -28,7 +28,7 @@
           <!--                             @click="editTask(comment)"></font-awesome-icon>-->
           |
           <font-awesome-icon v-if="user.isAdmin" icon="trash" class="mt-2 hover deleteColor"
-                             @click="deleteComment(index,null,comment.text)"></font-awesome-icon>
+                             @click="deleteComment(index,null,comment.text,null)"></font-awesome-icon>
         </div>
         <transition name="fade">
           <div v-show="comment.isReplyOn" class="w-100 subTaskAnime">
@@ -54,7 +54,7 @@
                 <!--                                   @click="editTask(reply)"></font-awesome-icon>-->
                 <!--                |-->
                 <font-awesome-icon icon="trash" class="mt-2 hover deleteColor"
-                                   @click="deleteComment(index,replyIndex,reply.text)"></font-awesome-icon>
+                                   @click="deleteComment(index,replyIndex,comment.text,reply.text)"></font-awesome-icon>
               </div>
             </div>
             <textarea type="text" class="center  mt-2 text-center"
@@ -163,20 +163,29 @@ export default {
     openSubReply(index) {
       this.comments[index].isReplyOn = !this.comments[index].isReplyOn;
     },
-    deleteComment(index, replyIndex, text) {
+    deleteComment(index, replyIndex, commentText, replyText) {
       if (replyIndex === null) {
         this.$http.delete("news/delete-comment", {
           data: {
             _id: this.$route.params.news_id,
-            text: text
+            text: commentText
+          }
+        }).then((res) => {
+          this.comments.splice(index, 1);
+          console.log(res)
+        })
+
+      } else {
+        this.$http.delete("news/delete-reply", {
+          data: {
+            _id: this.$route.params.news_id,
+            commentText: commentText,
+            replyText: replyText
           }
         }).then((res) => {
           console.log(res)
+          this.comments[index].replies.splice(replyIndex, 1);
         })
-        this.comments.splice(index, 1);
-
-      } else {
-        this.comments[index].replies.splice(replyIndex, 1);
       }
       if (this.comments.length === 0) {
         this.feedback = null;
@@ -214,7 +223,7 @@ export default {
         id: this.$route.params.news_id
       }
     }).then((res) => {
-      console.log(res.data.comments)
+      // console.log(res.data.comments)
       this.comments = res.data.comments
     })
   },
