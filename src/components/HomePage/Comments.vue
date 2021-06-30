@@ -53,7 +53,7 @@
                 <!--                <font-awesome-icon icon="edit" class="mt-2 hover editColor"-->
                 <!--                                   @click="editTask(reply)"></font-awesome-icon>-->
                 <!--                |-->
-                <font-awesome-icon icon="trash" class="mt-2 hover deleteColor"
+                <font-awesome-icon v-if="user.isAdmin" icon="trash" class="mt-2 hover deleteColor"
                                    @click="deleteComment(index,replyIndex,comment.text,reply.text)"></font-awesome-icon>
               </div>
             </div>

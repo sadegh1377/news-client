@@ -1,15 +1,15 @@
 <template>
   <div id="AddNews" class="container">
-    <form @submit.prevent="save()" class="myform shadow">
+    <form @submit.prevent="save()" class="myform shadow" enctype="multipart/form-data">
       <div class="form-row">
         <div class="form-group col-md-8">
-          <label for="title">عنوان</label>
-          <input type="text" class="form-control" id="title"
+          <label>عنوان</label>
+          <input type="text" class="form-control"
                  v-model="title">
         </div>
         <div class="form-group col-md-4">
-          <label for="inputState">موضوع</label>
-          <select id="inputState" class="form-control" v-model="newsClass">
+          <label>موضوع</label>
+          <select class="form-control" v-model="newsClass">
             <option v-for="c in newsClasses" :value="c">
               {{ c }}
             </option>
@@ -17,21 +17,19 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">متن خبر</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"
+        <label>متن خبر</label>
+        <textarea class="form-control" rows="8"
                   v-model="body"></textarea>
       </div>
-      <label>عکس سر تیتر</label>
-      <file-pond
-          name="test"
-          ref="pond"
-          label-idle="عکس تان را اینجا رها کنید یا جستجو"
-          v-bind:allow-multiple="true"
-          accepted-file-types="image/jpeg, image/png"
-          server="/api"
-          v-bind:files="myFiles"
-          v-on:init="handleFilePondInit"
-      />
+      <div class="hover w-25 align-self-center">
+        <span>عکس سر تیتر
+        <font-awesome-icon icon="info-circle"/>
+         </span>
+        <span
+            class="tooltiptext">ابتدا عکس سر تیتر را در یک آپلود سنتر آپلود کرده سپس URL عکس را در فیلد زیر کپی کنید
+        </span>
+      </div>
+      <input type="text" class="form-control text-left mb-2" v-model="imageUrl">
       <div class="col-md-12 text-center mt-2 mb-3">
         <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">ذخیره</button>
       </div>
@@ -51,11 +49,11 @@ export default {
   name: "AddNews",
   data() {
     return {
-      myFiles: ["cat.jpeg"],
       title: null,
       body: null,
       newsClass: "تکنولوژی",
       newsClasses: ["تکنولوژی", "ورزش", "اقتصاد", "سیاست", "سلامت"],
+      imageUrl: null,
       feedback: null,
       success: null,
       user: null,
@@ -65,11 +63,8 @@ export default {
       files: []
     }
   },
-  computed: {},
   methods: {
-    handleFilePondInit: function () {
-      console.log("FilePond has initialized");
-    },
+
     save() {
       let token = localStorage.getItem("jwt");
       if (this.title === null || this.title === "" || this.body === null || this.body === "") {
@@ -81,6 +76,7 @@ export default {
           newsClass: this.newsClass,
           viewCounter: 0,
           author: this.user.name,
+          imageUrl: this.imageUrl,
           replies: []
         }, {
           headers: {
@@ -98,6 +94,7 @@ export default {
         this.title = null;
         this.body = null;
         this.newsClass = "تکنولوژی";
+        this.imageUrl = null;
         this.feedback = null;
       }
     },
@@ -120,6 +117,32 @@ export default {
 </script>
 
 <style scoped>
+.hover {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #666666;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 3px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 110%;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.hover:hover .tooltiptext {
+  visibility: visible;
+  opacity: .8;
+}
+
 .form {
   display: block;
   height: 100px;

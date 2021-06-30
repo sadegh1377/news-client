@@ -7,7 +7,11 @@
                    :key="news._id">
         <div class="card h-100 shadow">
           <div class="card-img-top">
-            <img class="img-fluid img" src="../../assets/newsClasses/technology.png" :alt="news.newsClass">
+            <img class="img-fluid img" v-if="news.imageUrl == null || news.imageUrl === undefined"
+                 src="../../assets/newsClasses/technology.png"
+                 :alt="news.newsClass">
+            <img v-else class="img-fluid img" :src="news.imageUrl"
+                 :alt="news.newsClass">
           </div>
           <div class="card-body">
             <h5 class="card-title  border-bottom" :title="news.newsTitle">
