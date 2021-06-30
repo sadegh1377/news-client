@@ -3,7 +3,11 @@
     <div class="container mt-5 pb-5">
       <div class="card h-100 ">
         <div class="card-img-top">
-          <img class="img-fluid img" src="../../assets/newsClasses/technology.png" :alt="fullNews.newsClass">
+          <img class="img-fluid img" v-if="fullNews.imageUrl == null || fullNews.imageUrl === undefined"
+               src="../../assets/newsClasses/technology.png"
+               :alt="fullNews.newsClass">
+          <img v-else class="img-fluid img" :src="fullNews.imageUrl"
+               :alt="fullNews.newsClass">
         </div>
         <div class="card-body">
           <h5 class="card-title  border-bottom pb-3" :title="fullNews.newsTitle">

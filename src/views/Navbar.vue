@@ -25,10 +25,10 @@
             </div>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" v-if="isAuthenticated">
-          <input class="form-control ml-sm-2" type="search" placeholder="جستجو" aria-label="Search">
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">جستجو</button>
-        </form>
+<!--        <form class="form-inline my-2 my-lg-0" v-if="isAuthenticated">-->
+<!--          <input class="form-control ml-sm-2" type="search" placeholder="جستجو" aria-label="Search">-->
+<!--          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">جستجو</button>-->
+<!--        </form>-->
       </div>
     </nav>
   </div>

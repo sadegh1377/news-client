@@ -21,12 +21,12 @@
         <textarea class="form-control" rows="8"
                   v-model="body"></textarea>
       </div>
-      <div class="hover w-25 align-self-center">
-        <span>عکس سر تیتر
+      <div class="hover align-self-center">
+        <span >عکس سر تیتر
         <font-awesome-icon icon="info-circle"/>
          </span>
         <span
-            class="tooltiptext">ابتدا عکس سر تیتر را در یک آپلود سنتر آپلود کرده سپس URL عکس را در فیلد زیر کپی کنید
+            class="tooltipText">ابتدا عکس سر تیتر را در یک آپلود سنتر آپلود کرده سپس URL عکس را در فیلد زیر کپی کنید
         </span>
       </div>
       <input type="text" class="form-control text-left mb-2" v-model="imageUrl">
@@ -120,12 +120,13 @@ export default {
 .hover {
   position: relative;
   display: inline-block;
+  width: 130px;
 }
 
-.tooltiptext {
+.tooltipText {
   visibility: hidden;
   width: 300px;
-  background-color: #666666;
+  background-color: #929292;
   color: #fff;
   text-align: center;
   border-radius: 6px;
@@ -138,9 +139,9 @@ export default {
   transition: opacity 1s;
 }
 
-.hover:hover .tooltiptext {
+.hover:hover .tooltipText {
   visibility: visible;
-  opacity: .8;
+  opacity: 1;
 }
 
 .form {
