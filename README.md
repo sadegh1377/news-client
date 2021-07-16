@@ -1,4 +1,4 @@
-# news
+# news-client
 
 ## Project setup
 ```
