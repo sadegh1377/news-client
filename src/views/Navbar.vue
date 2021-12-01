@@ -17,6 +17,9 @@
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                @click="open()">
               {{ user.name }}
+              <img class="profImage" src="../assets/profilePicture.png"
+                   v-if=" user.imageUrl == null || user.imageUrl === undefined" alt="p"/>
+              <img class="profImage" :src="user.imageUrl" alt="p" v-else/>
             </a>
             <div class="dropdown-menu " v-show="isOpen">
               <button class="dropdown-item" @click="goToProfile()" @blur="close()">حساب کاربری</button>
@@ -25,10 +28,10 @@
             </div>
           </li>
         </ul>
-<!--        <form class="form-inline my-2 my-lg-0" v-if="isAuthenticated">-->
-<!--          <input class="form-control ml-sm-2" type="search" placeholder="جستجو" aria-label="Search">-->
-<!--          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">جستجو</button>-->
-<!--        </form>-->
+        <!--        <form class="form-inline my-2 my-lg-0" v-if="isAuthenticated">-->
+        <!--          <input class="form-control ml-sm-2" type="search" placeholder="جستجو" aria-label="Search">-->
+        <!--          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">جستجو</button>-->
+        <!--        </form>-->
       </div>
     </nav>
   </div>
@@ -83,6 +86,17 @@ export default {
 </script>
 
 <style scoped>
+.profImage {
+  display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 27px;
+  height: 27px;
+  /*border: 1px solid white;*/
+  border-radius: 50%;
+  aspect-ratio: auto 30 / 30
+}
+
 .dropdown-menu {
   display: block;
   /*color: white;*/

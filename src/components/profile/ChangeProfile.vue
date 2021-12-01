@@ -5,12 +5,16 @@
         <p class="btn btn-block nonePointer alert-info ">برای ایجاد تغییر روی نام یا ایمیل دوبار کلیک کنید</p>
       </div>
       <form @submit.prevent="save()" name="registration">
+        <img class="profileImage" src="../../assets/profilePicture.png"
+             v-if="oldImageUrl == null || oldImageUrl === undefined" alt="Profile Image">
+        <img class="profileImage" :src="oldImageUrl" :alt="'profile image of ' + oldName" v-else>
+
         <div class="form-group text-right">
           <label>نام</label>
           <div class="form-control" v-if="isDisable"
                @dblclick="setOldNameAndEmail">{{ oldName }}
           </div>
-          <input v-else type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
+          <input v-else type="text" name="name" class="form-control" id="name"
                  placeholder="نام خود را وارد کنید"
                  v-model="newName"
                  v-focus>
@@ -23,6 +27,16 @@
           <input v-else type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
                  placeholder="example@example.com"
                  v-model="newEmail">
+        </div>
+        <div class="form-group text-right">
+          <label>عکس پروفایل</label>
+          <div class="form-control" v-if="isDisable"
+               @dblclick="setOldNameAndEmail">{{ oldImageUrl }}
+          </div>
+          <input v-else type="text" name="name" class="form-control" id="profImage"
+                 placeholder="لینک عکس پروفایل خود را وارد کنید"
+                 v-model="newImageUrl"
+                 v-focus>
         </div>
         <div class="form-group text-right">
           <label>رمز عبور</label>
@@ -56,8 +70,10 @@ export default {
     return {
       newName: "",
       newEmail: "",
+      newImageUrl: "",
       oldName: "",
       oldEmail: "",
+      oldImageUrl: "",
       password: "",
       confirmPassword: "",
       isDisable: true,
@@ -86,6 +102,7 @@ export default {
             oldEmail: this.oldEmail,
             newEmail: this.newEmail,
             newName: this.newName,
+            newImageUrl: this.newImageUrl,
             password: this.password
           }).then((res) => {
             console.log(res)
@@ -137,8 +154,10 @@ export default {
         'Authorization': `Bearer ${token}`
       }
     }).then((res) => {
+      console.log(res.data)
       this.oldName = res.data.name;
-      this.oldEmail = res.data.email
+      this.oldEmail = res.data.email;
+      this.oldImageUrl = res.data.imageUrl;
     }).catch((err) => {
       console.log(err)
     })
@@ -148,6 +167,16 @@ export default {
 
 <style scoped>
 @import "../../assets/loginSingUp.css";
+
+.profileImage {
+  display: inline-block;
+  margin: 0 auto;
+  width: 150px;
+  height: 150px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  aspect-ratio: auto 100 / 100;
+}
 
 .myform {
   max-width: 700px !important;
