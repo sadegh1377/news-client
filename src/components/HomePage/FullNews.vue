@@ -3,16 +3,20 @@
     <div class="container mt-5 pb-5">
       <div class="card h-100 ">
         <div class="card-img-top">
-          <img class="img-fluid img" v-if="fullNews.imageUrl == null || fullNews.imageUrl === undefined"
+          <div class="top-right"> شناسه یکتای خبر:<br>
+            {{ fullNews._id }}
+          </div>
+          <img class="img-fluid img" v-if="fullNews.imageUrl == null || fullNews.imageUrl === undefined
+          || fullNews.imageUrl === ''"
                src="../../assets/newsClasses/technology.png"
                :alt="fullNews.newsClass">
           <img v-else class="img-fluid img" :src="fullNews.imageUrl"
                :alt="fullNews.newsClass">
         </div>
         <div class="card-body">
-          <h5 class="card-title  border-bottom pb-3" :title="fullNews.newsTitle">
+          <h3 class="card-title  border-bottom pb-3" :title="fullNews.newsTitle">
             {{ fullNews.newsTitle }}
-          </h5>
+          </h3>
           <p class="card-text line-clamp">
             {{ fullNews.newsBody }}
           </p>
@@ -31,38 +35,18 @@
       <div class="col-12 mt-2">
         <h4>نظرات</h4>
       </div>
-      <todo-list :fullNews="fullNews"/>
-      <!--    <div class="container col-12  border p-3">-->
-      <!--      <h5>نظرات</h5>-->
-      <!--      <hr>-->
-      <!--      <div class="text-right pr-5" v-for="comment in comments">-->
-      <!--        <div class="row">-->
-      <!--          <h5>{{ comment.name }}</h5>-->
-      <!--          <p class="border w-75 h-100 mr-3 p-2">{{ comment.text }}</p>-->
-      <!--          <button class="btn mybtn h-50 align-self-center mr-5">پاسخ</button>-->
-      <!--          <div class="text-right w-75 " v-for="reply in comment.reply">-->
-      <!--            <div class="row">-->
-      <!--              <h5>{{ reply.name }}</h5>-->
-      <!--              <p>{{ reply.text }}</p>-->
-      <!--            </div>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--      <form class="row pr-5">-->
-      <!--        <textarea cols="8"></textarea>-->
-      <!--        <button class="mr-3">ارسال</button>-->
-      <!--      </form>-->
-      <!--    </div>-->
+      <Comments :fullNews="fullNews"/>
+
     </div>
   </div>
 </template>
 
 <script>
-import TodoList from "./Comments";
+import Comments from "./Comments";
 
 export default {
   name: "FullNews",
-  components: {TodoList},
+  components: {Comments},
   data() {
     return {
       fullNews: "",
@@ -86,6 +70,7 @@ export default {
 
         this.fullNews = res.data
         this.fullNews.createdAt = date.toLocaleString()
+        console.log(this.fullNews)
       }).catch((err) => {
         console.log(err);
       })
@@ -97,6 +82,18 @@ export default {
 </script>
 
 <style scoped>
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  text-align: right;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #2F3242;
+  opacity: .5;
+}
+
 .img {
   height: 300px !important;
 }
