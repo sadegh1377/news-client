@@ -50,6 +50,15 @@ export default {
     changePage(page) {
       this.pageName = page;
       window.scrollTo(0, 0);
+    },
+    compare(a, b) {
+      if (a.viewCounter < b.viewCounter) {
+        return 1;
+      }
+      if (a.viewCounter > b.viewCounter) {
+        return -1;
+      }
+      return 0;
     }
   },
   created() {
@@ -73,10 +82,12 @@ export default {
               case "تکنولوژی":
                 this.sideBarClasses.push("تکنولوژی");
                 this.technology = res.data[i];
+                this.technology.sort(this.compare);
                 break;
               case "اقتصاد":
                 this.sideBarClasses.push("اقتصاد");
                 this.economics = res.data[i];
+                this.economics.sort(this.compare);
                 break;
               case "سلامت":
                 this.sideBarClasses.push("سلامت");
@@ -95,6 +106,11 @@ export default {
             console.log("something were wrong!!!")
           }
         }
+
+
+
+        this.politics.sort(this.compare)
+        this.sports.sort(this.compare)
         this.pageName = this.sideBarClasses[0];
       }).catch((err) => {
         console.log(err)
