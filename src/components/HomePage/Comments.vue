@@ -38,6 +38,7 @@
                 <div class="font-weight-bold">{{ reply.name }}</div>
                 <div v-if="!reply.editing" class="border p-2 rounded">
                   <p class="mr-3 d-inline text-break p-2">{{ reply.text }}</p>
+                  <div class="text-left font-italic text-secondary">{{ reply.date.toLocaleString() }}</div>
                 </div>
                 <textarea type="text"
                           class="mr-3 rounded"
