@@ -7,7 +7,8 @@
                    :key="news._id">
         <div class="card h-100 shadow">
           <div class="card-img-top">
-            <img class="img-fluid img" v-if="news.imageUrl == null || news.imageUrl === undefined"
+            <img class="img-fluid img" v-if="news.imageUrl === null || news.imageUrl === undefined
+                  || news.imageUrl=== ''"
                  src="../../assets/newsClasses/technology.png"
                  :alt="news.newsClass">
             <img v-else class="img-fluid img" :src="news.imageUrl"
@@ -26,9 +27,14 @@
               <font-awesome-icon icon="eye"></font-awesome-icon>
               {{ news.viewCounter }}
             </div>
-            <div class="col-6 text-left" v-if="isAdmin" @click.prevent="deleteNews(news._id,divId)"
-                 title="پاک کردن">
-              <font-awesome-icon class="hover" icon="trash-alt"
+            <div class="col-6 text-left">
+              <font-awesome-icon icon="edit" class="hover ml-2"
+                                 @click.prevent="goToEditPage(news._id)"
+                                 title="ویرایش کردن">
+              </font-awesome-icon>
+              <font-awesome-icon class="hover" icon="trash-alt" v-if="isAdmin"
+                                 @click.prevent="deleteNews(news._id,divId)"
+                                 title="پاک کردن"
               ></font-awesome-icon>
             </div>
           </div>
@@ -63,6 +69,9 @@ export default {
     // })
   },
   methods: {
+    goToEditPage(id) {
+      this.$router.push({name: 'EditPage', params: {news_id: id}})
+    },
     deleteNews(_id, divId) {
       this.$http.delete("/news/delete-news", {
         data: {
@@ -86,6 +95,7 @@ export default {
 </script>
 
 <style scoped>
+
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 6;
