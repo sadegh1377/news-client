@@ -5,6 +5,7 @@ import SignUp from "../components/authentication/SignUp";
 import Profile from "../components/profile/Profile";
 import Home from "../views/Home";
 import FullNews from "../components/HomePage/FullNews";
+import EditPage from "../components/HomePage/EditPage";
 
 Vue.use(VueRouter)
 
@@ -93,6 +94,21 @@ const routes = [
                 {
                     name: 'FullNews',
                     content: 'خبر'
+                }
+            ]
+        }
+    },
+    {
+        name: "EditPage",
+        path: "/news/edit-page/:news_id",
+        component: EditPage,
+        meta: {
+            requiresAuth: true,
+            title: 'ویرایش خبر',
+            metaTags: [
+                {
+                    name: 'EditPage',
+                    content: 'ویرایش خبر'
                 }
             ]
         }
