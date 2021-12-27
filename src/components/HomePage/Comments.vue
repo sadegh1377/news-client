@@ -83,7 +83,7 @@
 
 <script>
 export default {
-  name: "TodoList",
+  name: "Comments",
   props: {
     fullNews: {
       require: true
